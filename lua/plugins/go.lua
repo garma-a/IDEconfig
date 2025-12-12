@@ -8,14 +8,8 @@ return {
 	},
 	config = function()
 		require("go").setup({
-			gofmt = "gofumpt", -- Use 'gofumpt' for formatting
+			gofmt = "gofumpt",
 			max_line_len = 120,
-			tag_transform = false,
-			test_dir = "",
-			comment_placeholder = "   ",
-			lsp_cfg = true,
-			lsp_on_attach = true,
-			dap_debug = true,
 		})
 	end,
 	event = { "CmdlineEnter" },

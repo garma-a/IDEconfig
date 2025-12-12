@@ -112,6 +112,16 @@ vim.keymap.set("v", "<leader>cf", function()
 	require("CopilotChat").ask("Fix this code", { selection = require("CopilotChat.select").visual })
 end, { desc = "Copilot Fix" })
 
+-- Custom "Smart Shift-Tab" logic
+-- vim.keymap.set("i", "<S-Tab>", function()
+-- 	if require("copilot.suggestion").is_visible() then
+-- 		require("copilot.suggestion").accept()
+-- 	else
+-- 		-- If no suggestion, send a real Shift-Tab (usually un-indent)
+-- 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
+-- 	end
+-- end, { desc = "Copilot Accept or Shift-Tab" })
+
 -- Key: Visual mode explain
 vim.keymap.set("v", "<leader>ce", function()
 	require("CopilotChat").ask("Explain this code", { selection = require("CopilotChat.select").visual })

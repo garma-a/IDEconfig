@@ -1,4 +1,4 @@
--- Load global settings first (leader keys, etc.)
+--Load global settings first (leader keys, etc.)
 require("config.globals")
 
 -- Load basic vim options

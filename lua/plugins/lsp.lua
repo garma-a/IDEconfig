@@ -375,25 +375,21 @@ return {
 							opts.settings = servers.omnisharp.settings
 						end
 
-						require("lspconfig")[server_name].setup(opts)
+						vim.lsp.config(server_name, opts)
+						vim.lsp.enable(server_name)
 					end,
 				},
 			})
 			vim.defer_fn(function()
-				-- Get the global npm prefix to find installed plugins
 				local npm_prefix = vim.fn.trim(vim.fn.system("npm config get prefix 2>/dev/null"))
 				local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-
-				-- Determine the correct node_modules path based on platform
 				local plugin_path
 				if is_windows then
-					-- Windows uses npm_prefix/node_modules
 					if npm_prefix == "" then
 						npm_prefix = vim.fn.expand("$APPDATA/npm")
 					end
 					plugin_path = npm_prefix .. "/node_modules/@styled/typescript-styled-plugin"
 				else
-					-- Unix-like systems use npm_prefix/lib/node_modules
 					if npm_prefix == "" then
 						npm_prefix = "/usr/local"
 					end
@@ -403,7 +399,7 @@ return {
 				local plugin_paths_dir = is_windows and (npm_prefix .. "/node_modules")
 					or (npm_prefix .. "/lib/node_modules")
 
-				require("lspconfig").ts_ls.setup({
+				local ts_opts = {
 					capabilities = capabilities,
 					single_file_support = true,
 					on_attach = function(client, bufnr)
@@ -419,21 +415,19 @@ return {
 					},
 					settings = {
 						typescript = {
-							preferences = {
-								importModuleSpecifierPreference = "project-relative",
-							},
-							tsserver = {
-								pluginPaths = { plugin_paths_dir },
-							},
+							preferences = { importModuleSpecifierPreference = "project-relative" },
+							tsserver = { pluginPaths = { plugin_paths_dir } },
 						},
 						javascript = {
-							preferences = {
-								importModuleSpecifierPreference = "project-relative",
-							},
+							preferences = { importModuleSpecifierPreference = "project-relative" },
 						},
 					},
 					filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-				})
+				}
+
+				-- Re-register ts_ls with the specialized options
+				vim.lsp.config("ts_ls", ts_opts)
+				vim.lsp.enable("ts_ls")
 			end, 100)
 		end,
 	},

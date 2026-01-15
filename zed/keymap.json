@@ -1,0 +1,357 @@
+[
+  // ============================================================
+  // CUSTOM KEYMAPS - Converted from Neovim Configuration
+  // ============================================================
+  // These keybindings mirror the custom Neovim setup for a familiar experience
+  // ============================================================
+
+  // ============================================================
+  // ESCAPE KEY ALTERNATIVES
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "alt-c": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "alt-c": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "alt-c": "editor::Cancel"
+    }
+  },
+
+  // ============================================================
+  // RECORDING MACROS AND BASIC REMAPS (q <-> i)
+  // ============================================================
+  // In Neovim: q -> i (insert), m -> q (record macro)
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // q enters insert mode (like 'i')
+      "q": "vim::InsertBefore",
+      // Q enters insert at line beginning (like 'I')
+      "shift-q": "vim::InsertFirstNonWhitespace",
+      // m starts recording macro (like 'q')
+      "m": "vim::ToggleRecord",
+      "shift-m": "vim::ToggleRecord",
+      // ; sets a mark (like 'm')
+      ";": "vim::PushMark"
+    }
+  },
+
+  // ============================================================
+  // WORD NAVIGATION (w <-> b, e <-> w)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // w moves backward (like 'b')
+      "w": "vim::PreviousWordStart",
+      "shift-w": ["vim::PreviousWordStart", { "ignorePunctuation": true }],
+      // e moves forward (like 'w')
+      "e": "vim::NextWordStart",
+      "shift-e": ["vim::NextWordStart", { "ignorePunctuation": true }]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "w": "vim::PreviousWordStart",
+      "shift-w": ["vim::PreviousWordStart", { "ignorePunctuation": true }],
+      "e": "vim::NextWordStart",
+      "shift-e": ["vim::NextWordStart", { "ignorePunctuation": true }]
+    }
+  },
+
+  // ============================================================
+  // INDENTATION AND MOVEMENT (+ <-> =)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // + auto-indents (like '=')
+      "+": "editor::Format",
+      // = moves down (like '+')
+      "=": "vim::Down"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "+": "editor::Format",
+      "=": "vim::Down"
+    }
+  },
+
+  // ============================================================
+  // HALF-PAGE SCROLLING ({ -> Ctrl+u, } -> Ctrl+d)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // } does half-page down (like Ctrl+d)
+      "}": "vim::ScrollDown",
+      // { does half-page up (like Ctrl+u)
+      "{": "vim::ScrollUp",
+      // Ctrl+d jumps to next paragraph (like '}')
+      "ctrl-d": "vim::EndOfParagraph",
+      // Ctrl+e jumps to previous paragraph (like '{')
+      "ctrl-e": "vim::StartOfParagraph"
+    }
+  },
+
+  // ============================================================
+  // MATCHING BRACKETS AND END OF LINE
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Ctrl+x jumps to matching bracket (like '%')
+      "ctrl-x": "vim::Matching",
+      // Z jumps to end of line (like '$')
+      "shift-z": "vim::EndOfLine"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "ctrl-x": "vim::Matching",
+      "shift-z": "vim::EndOfLine"
+    }
+  },
+
+  // ============================================================
+  // WINDOW NAVIGATION
+  // ============================================================
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-left": "workspace::ActivatePaneLeft",
+      "alt-right": "workspace::ActivatePaneRight",
+      "alt-up": "workspace::ActivatePaneUp",
+      "alt-down": "workspace::ActivatePaneDown"
+    }
+  },
+
+  // ============================================================
+  // LINE MOVEMENT (Visual Mode)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp"
+    }
+  },
+
+  // ============================================================
+  // DIAGNOSTICS NAVIGATION (Normal Mode)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "alt-j": "editor::GoToDiagnostic",
+      "alt-k": "editor::GoToPrevDiagnostic",
+      // Close current buffer/tab
+      "alt-=": "pane::CloseActiveItem"
+    }
+  },
+
+  // ============================================================
+  // TAB/BUFFER NAVIGATION
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // < goes to previous tab
+      "<": "pane::ActivatePrevItem",
+      // > goes to next tab
+      ">": "pane::ActivateNextItem",
+      // Direct tab navigation
+      "ctrl-]": "pane::ActivateItem1",
+      "ctrl-[": "pane::ActivateItem2",
+      "ctrl-p": "pane::ActivateItem3",
+      "ctrl-o": "pane::ActivateItem4"
+    }
+  },
+
+  // ============================================================
+  // LEADER KEY MAPPINGS (Space as leader)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Search and navigation
+      "space s f": "file_finder::Toggle",
+      "space s g": "search::SelectAllMatches",
+      "space s h": "zed::OpenKeymap",
+      "space s k": "zed::OpenKeymap",
+      "space s d": "diagnostics::Deploy",
+      "space /": "buffer_search::Deploy",
+
+      // Code actions
+      "space c a": "editor::ToggleCodeActions",
+      "space r n": "editor::Rename",
+      "space f": "editor::Format",
+
+      // Diagnostics
+      "space q": "diagnostics::Deploy",
+
+      // Split window
+      "space w o": "pane::SplitRight",
+
+      // Indentation with leader
+      "space >": "editor::Indent",
+      "space <": "editor::Outdent",
+
+      // Buffer navigation (mirroring Ctrl bindings)
+      "space ]": "pane::ActivateItem1",
+      "space [": "pane::ActivateItem2",
+      "space p": "pane::ActivateItem3",
+      "space o": "pane::ActivateItem4",
+
+      // Find existing buffers
+      "space space": "tab_switcher::Toggle",
+
+      // LSP features
+      "g d": "editor::GoToDefinition",
+      "g r": "editor::FindAllReferences",
+      "g shift-i": "editor::GoToImplementation",
+      "g shift-d": "editor::GoToDeclaration",
+      "space shift-d": "editor::GoToTypeDefinition",
+      "space d s": "outline::Toggle"
+    }
+  },
+
+  // ============================================================
+  // TERMINAL TOGGLE
+  // ============================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Toggle terminal with Alt+-
+      "alt--": "terminal_panel::ToggleFocus",
+      // Toggle sidebar (like alt+s in VSCode config)
+      "alt-s": "workspace::ToggleLeftDock",
+      // Toggle file explorer
+      "alt-a": "project_panel::ToggleFocus"
+    }
+  },
+
+  // ============================================================
+  // QUICK OPEN / FILE FINDER
+  // ============================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-j ctrl-h": "file_finder::Toggle",
+      "ctrl-h ctrl-l": "command_palette::Toggle"
+    }
+  },
+
+  // ============================================================
+  // TERMINAL MODE ESCAPE
+  // ============================================================
+  {
+    "context": "Terminal",
+    "bindings": {
+      "escape escape": "workspace::Focus",
+      "alt-c": "workspace::Focus"
+    }
+  },
+
+  // ============================================================
+  // AI/COPILOT ASSISTANT (equivalent to CopilotChat)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space c o": "assistant::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // Ask Copilot to fix code (visual selection)
+      "space c f": "assistant::InlineAssist",
+      // Ask Copilot to explain code (visual selection)
+      "space c e": "assistant::InlineAssist"
+    }
+  },
+
+  // ============================================================
+  // MULTI-CURSOR (equivalent to telescope search)
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space s w": "editor::SelectAllMatches"
+    }
+  },
+
+  // ============================================================
+  // TOGGLE INLAY HINTS
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space t h": "editor::ToggleInlayHints"
+    }
+  },
+
+  // ============================================================
+  // GIT INTEGRATION
+  // ============================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-g": "workspace::ToggleBottomDock"
+    }
+  },
+
+  // ============================================================
+  // HARPOON-LIKE QUICK FILE ACCESS
+  // Zed doesn't have Harpoon, but we can use bookmarks
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Add/toggle bookmark (like Harpoon add file)
+      "space h a": "editor::ToggleBookmark",
+      // Navigate bookmarks (like Harpoon menu)
+      "space h m": "bookmarks::OpenBookmarks"
+    }
+  },
+
+  // ============================================================
+  // TERMINAL SWITCHING (Alt+1-5)
+  // Zed uses these for pane switching
+  // ============================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-1": "pane::ActivateItem1",
+      "alt-2": "pane::ActivateItem2",
+      "alt-3": "pane::ActivateItem3",
+      "alt-4": "pane::ActivateItem4",
+      "alt-5": "pane::ActivateItem5"
+    }
+  },
+
+  // ============================================================
+  // HOVER INFORMATION
+  // ============================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "alt-=": "editor::Hover"
+    }
+  }
+]

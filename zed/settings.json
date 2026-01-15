@@ -1,0 +1,206 @@
+{
+  // Theme configuration - equivalent to tokyonight-night in Neovim
+  "theme": "One Dark",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 14,
+  "ui_font_size": 14,
+
+  // Editor settings - equivalent to vim.opt settings
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "show_whitespaces": "boundary",
+  "tab_size": 2,
+  "soft_wrap": "none",
+  "scrollbar": {
+    "show": "auto"
+  },
+  "vertical_scroll_margin": 10,
+
+  // Vim mode settings - equivalent to Neovim keymaps
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_multiline_find": true,
+    "use_smartcase_find": true
+  },
+
+  // Auto-save equivalent to format_on_save in Neovim
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "format_on_save": "on",
+
+  // Terminal settings - equivalent to terminal configuration
+  "terminal": {
+    "shell": "system",
+    "line_height": "comfortable",
+    "copy_on_select": true
+  },
+
+  // File tree settings - equivalent to oil.nvim showing hidden files
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/node_modules",
+    "**/target"
+  ],
+
+  // LSP settings - equivalent to nvim-lspconfig
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "checkOnSave": {
+          "command": "clippy"
+        }
+      }
+    },
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "importModuleSpecifierPreference": "project-relative"
+        }
+      }
+    }
+  },
+
+  // Inlay hints - equivalent to LSP inlay hints in Neovim
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true
+  },
+
+  // Git settings - equivalent to gitsigns.nvim
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+
+  // Copilot settings - equivalent to copilot.vim
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
+
+  // UI settings - equivalent to Neovim UI plugins
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "fixed"
+  },
+  "current_line_highlight": "gutter",
+
+  // Language-specific settings
+  "languages": {
+    "Go": {
+      "format_on_save": "on",
+      "formatter": "language_server",
+      "tab_size": 4
+    },
+    "Rust": {
+      "format_on_save": "on",
+      "formatter": "language_server"
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "JavaScript": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "Python": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "black",
+          "arguments": ["-"]
+        }
+      }
+    },
+    "Lua": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "stylua",
+          "arguments": ["-"]
+        }
+      }
+    },
+    "C": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "clang-format",
+          "arguments": []
+        }
+      }
+    },
+    "C++": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "clang-format",
+          "arguments": []
+        }
+      }
+    },
+    "HTML": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "CSS": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "SQL": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "pg_format",
+          "arguments": ["--keyword-case", "upper", "--spaces", "2"]
+        }
+      }
+    },
+    "YAML": {
+      "tab_size": 2
+    },
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width"
+    }
+  }
+}

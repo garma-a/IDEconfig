@@ -1,15 +1,70 @@
-# Modular Neovim Configuration
+# IDE Configuration Repository
 
-This configuration has been organized into a modular structure for better maintainability and organization.
+A comprehensive collection of editor configurations for Neovim, VSCode, and Zed with consistent keybindings and settings across all editors.
 
-## VSCode Integration
+## 🚀 January 2026 Update: Zed Migration
 
-The `vscode.json` file contains VSCode keybindings that mirror the custom Neovim keymaps defined in `lua/config/keymaps.lua`. This allows the VSCode Vim extension to behave identically to the Neovim setup.
+This repository now includes Zed configuration as the primary editor setup. See [MIGRATION.md](./MIGRATION.md) for a complete migration guide from Neovim to Zed.
+
+## Repository Structure
+
+```
+IDEconfig/
+├── neovim/                  # Neovim configuration
+│   ├── init.lua             # Main entry point
+│   ├── init_original.lua    # Backup of monolithic config
+│   ├── lazy-lock.json       # Plugin lock file
+│   └── lua/
+│       ├── config/          # Core configuration modules
+│       │   ├── globals.lua  # Global settings & leader keys
+│       │   ├── options.lua  # Vim options & settings
+│       │   ├── keymaps.lua  # Key mappings
+│       │   ├── autocmds.lua # Autocommands
+│       │   └── lazy.lua     # Plugin manager setup
+│       └── plugins/         # Plugin configurations
+├── vscode/                  # VSCode configuration
+│   └── keybindings.json     # Custom keybindings for VSCode Vim
+├── zed/                     # Zed configuration (NEW!)
+│   ├── settings.json        # Editor settings
+│   └── keymap.json          # Custom keybindings
+├── README.md                # This file
+└── MIGRATION.md             # Neovim to Zed migration guide
+```
+
+---
+
+## Zed Setup (Recommended - 2026)
+
+### Quick Start
+
+1. **Install Zed:**
+   ```bash
+   curl -f https://zed.dev/install.sh | sh
+   ```
+
+2. **Copy configuration:**
+   ```bash
+   # Linux
+   cp zed/settings.json ~/.config/zed/settings.json
+   cp zed/keymap.json ~/.config/zed/keymap.json
+   
+   # macOS
+   cp zed/settings.json ~/Library/Application\ Support/Zed/settings.json
+   cp zed/keymap.json ~/Library/Application\ Support/Zed/keymap.json
+   ```
+
+3. **Restart Zed**
+
+See [MIGRATION.md](./MIGRATION.md) for detailed setup instructions and learning resources.
+
+---
+
+## VSCode Setup
 
 ### How to use with VSCode
 
 1. Install the [VSCode Vim extension](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
-2. Copy the contents of `vscode.json` to your VSCode `keybindings.json` file:
+2. Copy the contents of `vscode/keybindings.json` to your VSCode `keybindings.json` file:
    - On Windows/Linux: `File > Preferences > Keyboard Shortcuts` then click the "Open Keyboard Shortcuts (JSON)" icon
    - On macOS: `Code > Preferences > Keyboard Shortcuts` then click the "Open Keyboard Shortcuts (JSON)" icon
 3. Save and reload VSCode
@@ -80,44 +135,55 @@ The following custom keymaps from Neovim are now available in VSCode:
 ### Note
 Some Neovim keymaps related to plugins (Harpoon, Copilot Chat, Telescope, etc.) are not included in the VSCode configuration as they depend on Neovim-specific plugins. Only core vim keymaps and general editor navigation are included.
 
-## Structure
+---
+
+## Neovim Setup (Legacy)
+
+### How to use
+
+1. **Symlink or copy the neovim folder:**
+   ```bash
+   # Linux/macOS
+   ln -s $(pwd)/neovim ~/.config/nvim
+   
+   # Or copy
+   cp -r neovim/* ~/.config/nvim/
+   ```
+
+2. **Open Neovim** - Lazy.nvim will automatically install plugins
+
+### Neovim Structure
 
 ```
-├── init.lua                    # Main entry point (13 lines)
-├── init_original.lua          # Backup of original monolithic file
+neovim/
+├── init.lua                    # Main entry point
+├── init_original.lua           # Backup of original monolithic config
+├── lazy-lock.json              # Plugin version lock file
 └── lua/
-    ├── config/                # Core configuration modules
-    │   ├── globals.lua        # Global settings & leader keys
-    │   ├── options.lua        # Vim options & settings
-    │   ├── keymaps.lua        # Key mappings & custom functions
-    │   ├── autocmds.lua       # Autocommands for filetypes
-    │   └── lazy.lua           # Lazy.nvim plugin manager setup
-    └── plugins/               # Plugin configurations
-        ├── go.lua             # Go development tools
-        ├── zig.lua            # Zig development tools
-        ├── lsp.lua            # Language Server Protocol setup
-        ├── misc.lua           # Utility plugins (colorizer, etc.)
-        ├── treesitter.lua     # Syntax highlighting
-        ├── telescope.lua      # Fuzzy finder
-        ├── completion.lua     # Autocompletion & snippets
-        ├── formatting.lua     # Code formatting
-        ├── oil.lua            # File manager
-        ├── copilot.lua        # AI assistance
-        ├── git.lua            # Git integration
-        └── ui.lua             # Themes & interface
+    ├── config/                 # Core configuration modules
+    │   ├── globals.lua         # Global settings & leader keys
+    │   ├── options.lua         # Vim options & settings
+    │   ├── keymaps.lua         # Key mappings & custom functions
+    │   ├── autocmds.lua        # Autocommands for filetypes
+    │   └── lazy.lua            # Lazy.nvim plugin manager setup
+    └── plugins/                # Plugin configurations
+        ├── go.lua              # Go development tools
+        ├── zig.lua             # Zig development tools
+        ├── lsp.lua             # Language Server Protocol setup
+        ├── misc.lua            # Utility plugins (colorizer, etc.)
+        ├── treesitter.lua      # Syntax highlighting
+        ├── telescope.lua       # Fuzzy finder
+        ├── completion.lua      # Autocompletion & snippets
+        ├── formatting.lua      # Code formatting
+        ├── oil.lua             # File manager
+        ├── copilot.lua         # AI assistance
+        ├── git.lua             # Git integration
+        └── ui.lua              # Themes & interface
 ```
 
-## Benefits
+### Supported Languages
 
-- **Maintainable**: Each component is focused and easy to find
-- **Modular**: Enable/disable features by adding/removing plugin files
-- **Organized**: Clear separation between core config and plugins
-- **Readable**: Much easier to navigate and understand
-- **Same functionality**: All original features preserved exactly
-
-## Supported Languages
-
-This configuration includes full development support for:
+Full development support for:
 
 - **Go**: LSP (gopls), formatting (gofumpt), debugging, testing
 - **Zig**: LSP (zls), formatting (zig fmt), syntax highlighting, code snippets
@@ -131,25 +197,25 @@ This configuration includes full development support for:
 - **Prisma**: LSP for database schema
 - **Lua**: LSP (lazydev), stylua formatting
 
-## How it works
-
-1. `init.lua` loads the core configuration modules in order:
-   - `config.globals` - Sets up leader keys and global settings
-   - `config.options` - Configures vim options
-   - `config.keymaps` - Sets up all key mappings
-   - `config.autocmds` - Configures autocommands
-   - `config.lazy` - Bootstraps lazy.nvim and loads plugins
-
-2. Lazy.nvim automatically loads all files in the `lua/plugins/` directory
+---
 
 ## Customization
 
-- To disable a plugin: Remove or rename the corresponding file in `lua/plugins/`
-- To modify keymaps: Edit `lua/config/keymaps.lua`
-- To change vim options: Edit `lua/config/options.lua`
-- To add new plugins: Create a new file in `lua/plugins/`
+### For Zed
+- Edit `zed/settings.json` for editor settings
+- Edit `zed/keymap.json` for keybindings
 
-## Migration
+### For VSCode
+- Edit `vscode/keybindings.json` for custom keybindings
 
-This modular structure maintains 100% compatibility with the original configuration.
-The original 1351-line file has been preserved as `init_original.lua` for reference.
+### For Neovim
+- To disable a plugin: Remove or rename the corresponding file in `neovim/lua/plugins/`
+- To modify keymaps: Edit `neovim/lua/config/keymaps.lua`
+- To change vim options: Edit `neovim/lua/config/options.lua`
+- To add new plugins: Create a new file in `neovim/lua/plugins/`
+
+---
+
+## License
+
+Feel free to use and modify these configurations for your own setup.

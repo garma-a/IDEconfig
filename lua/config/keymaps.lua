@@ -52,9 +52,7 @@ vim.keymap.set("n", "<A-up>", "<C-w><C-k>", { desc = "Move focus to the upper wi
 vim.keymap.set("i", "<C-x>", "<Plug>(copilot-dismiss)", { silent = true })
 vim.keymap.set("n", "ZZ", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set({ "n", "o" }, "Z", "$", { noremap = true, silent = true })
--- local marks
-vim.api.nvim_set_keymap("n", ";", "m", { noremap = true })
---
+vim.api.nvim_set_keymap("n", "b", "m", { noremap = true })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
@@ -105,29 +103,6 @@ vim.keymap.set("i", "<A-c>", "<Esc>", opts)
 vim.keymap.set("v", "<A-c>", "<Esc>", opts)
 vim.keymap.set("t", "<A-c>", "<C-\\><C-n>", opts)
 
--- Recording macros and behavior changes
-vim.keymap.set("n", "m", "q", opts)
-vim.keymap.set("n", "M", "q", opts)
-vim.keymap.set("n", "Q", "I", opts)
-vim.keymap.set("n", "q", "i", opts)
-
--- Indentation and moving down
-vim.keymap.set("n", "+", "=", opts)
-vim.keymap.set("n", "=", "+", opts)
-vim.keymap.set("v", "+", "=", opts)
-vim.keymap.set("v", "=", "+", opts)
-
-vim.keymap.set("n", "w", "b", opts)
-vim.keymap.set("v", "w", "b", opts)
-vim.keymap.set("n", "W", "B", opts)
-vim.keymap.set("v", "W", "B", opts)
-
-vim.keymap.set("n", "E", "W", opts)
-vim.keymap.set("v", "E", "W", opts)
-
-vim.keymap.set("n", "e", "w", opts)
-vim.keymap.set("v", "e", "w", opts)
-
 vim.keymap.set("n", "}", "<C-d>", opts)
 
 vim.keymap.set("n", "{", "<C-u>", opts)
@@ -149,9 +124,7 @@ vim.keymap.set("n", "<A-up>", "<C-w><C-k>", { desc = "Move focus to the upper wi
 vim.keymap.set("i", "<C-x>", "<Plug>(copilot-dismiss)", { silent = true })
 vim.keymap.set("n", "ZZ", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set({ "n", "o" }, "Z", "$", { noremap = true, silent = true })
--- local marks
-vim.api.nvim_set_keymap("n", ";", "m", { noremap = true })
---
+vim.api.nvim_set_keymap("n", "b", "m", { noremap = true })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 

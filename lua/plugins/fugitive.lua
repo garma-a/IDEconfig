@@ -7,42 +7,43 @@ return {
 		{ "<leader>gp", "<cmd>Git push<cr>", desc = "Git Push" },
 		{ "<leader>gl", "<cmd>Git pull<cr>", desc = "Git Pull" },
 		{ "<leader>gb", "<cmd>Git blame<cr>", desc = "Git Blame" },
+		{ "<leader>gg", "<cmd>vertical Git log<cr>", desc = "Git Log" },
+		{ "<leader>gr", "<cmd>vertical Git reflog<cr>", desc = "Git Reflog" },
+		{ "<leader>gP", "<cmd>Git push --force-with-lease<cr>", desc = "Git Push (Force with Lease)" },
 	},
 	config = function()
 		local group = vim.api.nvim_create_augroup("FugitiveCustom", { clear = true })
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = group,
-			pattern = "fugitive",
+			pattern = { "fugitive", "git", "gitrebase" },
 			callback = function()
-				-- Helper function to safely "steal" a plugin's mapping
 				local function steal_key(original_key, new_key)
 					local map = vim.fn.maparg(original_key, "n", false, true)
 					if map and map.rhs then
 						local rhs = map.rhs
-						-- FIX THE CRASH: Replace <SID> with <SNR> + script_id
 						if map.sid and rhs:lower():find("<sid>") then
 							rhs = rhs:gsub("<[sS][iI][dD]>", "<SNR>" .. map.sid .. "_")
 						end
-						-- Map the new key to the sanitized action
 						vim.keymap.set("n", new_key, rhs, { buffer = true, remap = true, silent = true })
 					end
 				end
 
-				-- 1. STEAL THE ACTIONS (Before we overwrite the keys)
-				-- Map 's' to whatever '-' used to do (Stage)
-				steal_key("-", "s")
-				-- Map 'Tab' to whatever '=' used to do (Inline Diff)
-				steal_key("=", "<Tab>")
+				-- 1. STEAL ACTIONS (Only if they exist in this buffer)
+				steal_key("-", "s") -- Stage
+				steal_key("=", "<Tab>") -- Diff
 
-				-- 2. OVERWRITE NAVIGATION
-				local opts = { buffer = true, remap = false, silent = true, nowait = true }
-				vim.keymap.set("n", "-", "k", opts) -- Up
-				vim.keymap.set("n", "=", "j", opts) -- Down
+				-- 2. FORCE NAVIGATION (Absolute Overwrite)
+				-- We use a function call to ensure it bypasses any other mapping logic
+				local opts = { buffer = true, silent = true, nowait = true }
 
-				-- 3. OTHER SHORTCUTS
-				-- Use remap=true so 'cc' opens the fugitive commit window
+				vim.keymap.set("n", "-", "k", opts) -- Always Move Up
+				vim.keymap.set("n", "=", "j", opts) -- Always Move Down
+
+				-- 3. WINDOW COMMANDS
 				vim.keymap.set("n", "<leader>cc", "cc", { buffer = true, remap = true })
+				-- Allow 'q' to always close these vertical buffers easily
+				vim.keymap.set("n", "q", "<cmd>close<cr>", opts)
 			end,
 		})
 	end,

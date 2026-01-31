@@ -9,6 +9,9 @@ return {
 	config = function()
 		---@type opencode.Opts
 		vim.g.opencode_opts = {
+			events = {
+				reload = true,
+			},
 			-- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition" on the type or field.
 			provider = {
 				cmd = "env OPENCODE_DISABLE_FILETIME_CHECK=true opencode --port",

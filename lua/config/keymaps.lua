@@ -180,58 +180,58 @@ vim.keymap.set("n", "<A-f>", _G.focus_floating_window, { desc = "Focus floating 
 _G.OpencodeBuf = nil
 _G.OpencodePrevBuf = nil
 
-vim.keymap.set({ "n", "t" }, "<A-v>", function()
-	local current_buf = vim.api.nvim_get_current_buf()
-	local opencode_buf = _G.OpencodeBuf
-
-	-- CASE 1: We are currently in OpenCode -> GO BACK
-	if opencode_buf and current_buf == opencode_buf then
-		local prev_buf = _G.OpencodePrevBuf
-		if prev_buf and vim.api.nvim_buf_is_valid(prev_buf) then
-			-- Switch back to the previous buffer
-			vim.api.nvim_win_set_buf(0, prev_buf)
-		else
-			-- Fallback: If previous buffer was deleted, try the alternate buffer or next
-			pcall(vim.cmd, "b#")
-		end
-		return
-	end
-
-	-- CASE 2: We are in normal code -> OPEN OPENCODE
-
-	-- 1. Save current buffer so we can return to it
-	_G.OpencodePrevBuf = current_buf
-
-	-- 2. Check if OpenCode is already running in background
-	if opencode_buf and vim.api.nvim_buf_is_valid(opencode_buf) then
-		-- Just switch to it
-		vim.api.nvim_win_set_buf(0, opencode_buf)
-	else
-		-- 3. Create a new buffer if it doesn't exist
-		-- (false, false) = not listed in :ls, not a scratch buffer
-		local new_buf = vim.api.nvim_create_buf(false, false)
-		_G.OpencodeBuf = new_buf
-
-		-- Switch to the new buffer first
-		vim.api.nvim_win_set_buf(0, new_buf)
-
-		-- IMPORTANT: Keep process alive when we switch away
-		vim.bo[new_buf].bufhidden = "hide"
-
-		-- Start the terminal
-		vim.fn.termopen("opencode", {
-			on_exit = function()
-				_G.OpencodeBuf = nil
-			end,
-		})
-	end
-
-	-- UI Cleanup
-	vim.cmd("startinsert")
-	vim.opt_local.number = false
-	vim.opt_local.relativenumber = false
-	vim.opt_local.signcolumn = "no"
-end, { noremap = true, silent = true, desc = "Toggle OpenCode (Current Buffer)" })
+-- vim.keymap.set({ "n", "t" }, "<A-v>", function()
+-- 	local current_buf = vim.api.nvim_get_current_buf()
+-- 	local opencode_buf = _G.OpencodeBuf
+--
+-- 	-- CASE 1: We are currently in OpenCode -> GO BACK
+-- 	if opencode_buf and current_buf == opencode_buf then
+-- 		local prev_buf = _G.OpencodePrevBuf
+-- 		if prev_buf and vim.api.nvim_buf_is_valid(prev_buf) then
+-- 			-- Switch back to the previous buffer
+-- 			vim.api.nvim_win_set_buf(0, prev_buf)
+-- 		else
+-- 			-- Fallback: If previous buffer was deleted, try the alternate buffer or next
+-- 			pcall(vim.cmd, "b#")
+-- 		end
+-- 		return
+-- 	end
+--
+-- 	-- CASE 2: We are in normal code -> OPEN OPENCODE
+--
+-- 	-- 1. Save current buffer so we can return to it
+-- 	_G.OpencodePrevBuf = current_buf
+--
+-- 	-- 2. Check if OpenCode is already running in background
+-- 	if opencode_buf and vim.api.nvim_buf_is_valid(opencode_buf) then
+-- 		-- Just switch to it
+-- 		vim.api.nvim_win_set_buf(0, opencode_buf)
+-- 	else
+-- 		-- 3. Create a new buffer if it doesn't exist
+-- 		-- (false, false) = not listed in :ls, not a scratch buffer
+-- 		local new_buf = vim.api.nvim_create_buf(false, false)
+-- 		_G.OpencodeBuf = new_buf
+--
+-- 		-- Switch to the new buffer first
+-- 		vim.api.nvim_win_set_buf(0, new_buf)
+--
+-- 		-- IMPORTANT: Keep process alive when we switch away
+-- 		vim.bo[new_buf].bufhidden = "hide"
+--
+-- 		-- Start the terminal
+-- 		vim.fn.termopen("opencode", {
+-- 			on_exit = function()
+-- 				_G.OpencodeBuf = nil
+-- 			end,
+-- 		})
+-- 	end
+--
+-- 	-- UI Cleanup
+-- 	vim.cmd("startinsert")
+-- 	vim.opt_local.number = false
+-- 	vim.opt_local.relativenumber = false
+-- 	vim.opt_local.signcolumn = "no"
+-- end, { noremap = true, silent = true, desc = "Toggle OpenCode (Current Buffer)" })
 ----------------------------------
 ----------------------------------
 ----------------------------------

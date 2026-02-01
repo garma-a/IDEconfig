@@ -69,7 +69,11 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			-- Shortcut for searching files in ~/repo
+			vim.keymap.set("n", "<leader>sr", function()
+				builtin.find_files({ cwd = vim.fn.expand("~/repo") })
+			end, { desc = "[S]earch [R]epo files" })
 		end,
 	},
 }
-

@@ -26,12 +26,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.go",
-	callback = function()
-		vim.cmd("GoFmt")
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = "*.go",
+-- 	callback = function()
+-- 		vim.cmd("GoFmt")
+-- 	end,
+-- })
 
 -- Format Zig files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -55,12 +55,12 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Make Neovim treat .ejs as HTML
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.ejs",
-	callback = function()
-		vim.bo.filetype = "html"
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+-- 	pattern = "*.ejs",
+-- 	callback = function()
+-- 		vim.bo.filetype = "html"
+-- 	end,
+-- })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.zig",
 	callback = function()
@@ -131,3 +131,4 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+

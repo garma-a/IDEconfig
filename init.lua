@@ -136,3 +136,119 @@ end, { desc = "Go to Harpoon window 4" })
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
+---
+---
+-- Opencode Terminal Toggle (Global Command)
+-- Place this in your init.lua
+
+local opencode_state = {
+	buf = nil, -- opencode terminal buffer
+	prev_buf = nil, -- last file buffer before entering opencode
+	initialized = false, -- whether terminal was created
+}
+
+-- Helper to check if buffer is a real file buffer
+local function is_file_buffer(buf)
+	if not vim.api.nvim_buf_is_loaded(buf) then
+		return false
+	end
+	local buftype = vim.bo[buf].buftype
+	return buftype == "" or buftype == "acwrite"
+end
+
+-- Helper to check if we're in the opencode terminal
+local function is_in_opencode_terminal()
+	local cur_buf = vim.api.nvim_get_current_buf()
+	return opencode_state.buf and cur_buf == opencode_state.buf
+end
+
+-- Main toggle function
+local function toggle_opencode_terminal()
+	local cur_buf = vim.api.nvim_get_current_buf()
+
+	-- Case 1: We're already in opencode terminal -> go back to previous buffer
+	if is_in_opencode_terminal() then
+		local prev = opencode_state.prev_buf
+
+		-- Try to go to previous buffer with error handling
+		if prev and vim.api.nvim_buf_is_valid(prev) and vim.api.nvim_buf_is_loaded(prev) then
+			local success = pcall(vim.api.nvim_set_current_buf, prev)
+			if not success then
+				-- If switching failed, try alternate buffer
+				local alt_success = pcall(vim.cmd, "b#")
+				if not alt_success then
+					-- If that also failed, just do nothing (stay in opencode)
+					return
+				end
+			end
+		else
+			-- Try alternate buffer with error handling
+			local success = pcall(vim.cmd, "b#")
+			if not success then
+				-- If no alternate buffer, just stay in opencode
+				return
+			end
+		end
+		return
+	end
+
+	-- Case 2: Save current buffer as previous (only if it's valid)
+	if vim.api.nvim_buf_is_valid(cur_buf) then
+		opencode_state.prev_buf = cur_buf
+	end
+
+	-- Case 3: If terminal exists and is valid, switch to it
+	if
+		opencode_state.buf
+		and vim.api.nvim_buf_is_valid(opencode_state.buf)
+		and vim.api.nvim_buf_is_loaded(opencode_state.buf)
+	then
+		vim.api.nvim_set_current_buf(opencode_state.buf)
+
+		-- Enter insert mode
+		vim.schedule(function()
+			vim.cmd("startinsert")
+		end)
+		return
+	end
+
+	-- Case 4: Create new terminal for the first time
+	-- Create a new buffer
+	local buf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_set_current_buf(buf)
+
+	-- Open terminal and run opencode
+	vim.fn.termopen("opencode --port 12000", {
+		on_exit = function()
+			-- Clean up when terminal exits
+			opencode_state.buf = nil
+			opencode_state.initialized = false
+		end,
+	})
+
+	-- Store the buffer
+	opencode_state.buf = buf
+	opencode_state.initialized = true
+
+	-- Set buffer options
+	vim.bo[buf].buflisted = false
+	vim.bo[buf].bufhidden = "hide"
+
+	-- Enter insert mode immediately
+	vim.schedule(function()
+		vim.cmd("startinsert")
+	end)
+end
+
+-- Keymap for Alt+v (works from both normal and terminal mode)
+vim.keymap.set({ "n", "t" }, "<A-v>", function()
+	local mode = vim.fn.mode()
+
+	-- If in terminal mode, exit it first
+	if mode == "t" then
+		vim.cmd("stopinsert")
+		vim.schedule(toggle_opencode_terminal)
+	else
+		toggle_opencode_terminal()
+	end
+end, { desc = "Toggle opencode terminal", noremap = true, silent = true })

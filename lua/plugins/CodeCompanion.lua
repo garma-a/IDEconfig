@@ -7,7 +7,19 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
+			adapters = {
+				opts = {
+					timeout = 60000, -- 60s timeout (Safety for Egypt internet)
+					allow_insecure = true, -- Helps with DPI/Packet inspection
+				},
+			},
 			strategies = {
+				env = {
+					token = function()
+						return require("codecompanion.adapters.copilot").token
+					end,
+				},
+
 				chat = {
 					adapter = {
 						name = "copilot",

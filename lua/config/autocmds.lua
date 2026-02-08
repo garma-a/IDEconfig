@@ -131,4 +131,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
-
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "codecompanion",
+	callback = function()
+		-- Use { buffer = true } to make it a buffer-local mapping
+		-- This overwrites the plugin's default navigation for this specific window
+		vim.keymap.set("n", "}", "<C-d>", { buffer = true, silent = true })
+		vim.keymap.set("n", "{", "<C-u>", { buffer = true, silent = true })
+	end,
+})

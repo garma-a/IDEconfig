@@ -1,0 +1,26 @@
+mkdir -p ~/.config/kitty
+cat > ~/.config/kitty/cheatsheet.txt << 'EOF'
+╔════════════════════════════════════════════════════════════════╗
+║                    KITTY TERMINAL CHEATSHEET                   ║
+╚════════════════════════════════════════════════════════════════╝
+
+📑 TABS & WINDOWS
+  Ctrl+T              Create new tab
+  Alt+1, Alt+2...     Switch between tabs (1-5)
+  Ctrl+W              Close current tab
+  Ctrl+Shift+F11      Toggle fullscreen mode
+
+📋 COPY & PASTE
+  Ctrl+C              Copy selected text (or send interrupt)
+  Ctrl+V              Paste from clipboard
+
+🎨 OPACITY
+  Ctrl+Shift+A, M     Increase opacity
+  Ctrl+Shift+A, L     Decrease opacity
+  Ctrl+Shift+A, 1     Full opacity
+
+⚙️  CONFIGURATION
+  Edit:     nvim ~/.config/kitty/kitty.conf
+  Reload:   Ctrl+Shift+F5
+EOF
+

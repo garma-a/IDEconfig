@@ -64,6 +64,79 @@ return {
 					t({ "", "</body>", "</html>" }),
 				}),
 			})
+			-- HTTP / REST Snippets for Kulala
+			ls.add_snippets("http", {
+				-- GET Request
+				s("GET", {
+					t("# @name "),
+					i(1, "Name"),
+					t({ "", "" }),
+					t("GET "),
+					i(2, "http://localhost:3000/"),
+					t({ "", "" }),
+					t("Authorization: Bearer "),
+					i(3, "token"),
+					t({ "", "" }),
+				}),
+
+				-- POST Request (with JSON body)
+				s("POST", {
+					t("# @name "),
+					i(1, "Name"),
+					t({ "", "" }),
+					t("POST "),
+					i(2, "http://localhost:3000/"),
+					t({ "", "" }),
+					t("Content-Type: application/json"),
+					t({ "", "" }),
+					t("Authorization: Bearer "),
+					i(3, "token"),
+					t({ "", "" }),
+					t({ "", "{" }),
+					t({ "", "  " }),
+					i(0),
+					t({ "", "}" }),
+				}),
+
+				-- PATCH Request
+				s("PATCH", {
+					t("# @name "),
+					i(1, "Name"),
+					t({ "", "" }),
+					t("PATCH "),
+					i(2, "http://localhost:3000/"),
+					t({ "", "" }),
+					t("Content-Type: application/json"),
+					t({ "", "" }),
+					t({ "", "{" }),
+					t({ "", "  " }),
+					i(0),
+					t({ "", "}" }),
+				}),
+
+				-- DELETE Request
+				s("DELETE", {
+					t("# @name "),
+					i(1, "Name"),
+					t({ "", "" }),
+					t("DELETE "),
+					i(2, "http://localhost:3000/"),
+					t({ "", "" }),
+				}),
+
+				-- Variable Definition
+				s("var", {
+					t("@"),
+					i(1, "variableName"),
+					t(" = "),
+					i(2, "value"),
+				}),
+
+				-- Separator
+				s("sep", {
+					t({ "###", "" }),
+				}),
+			})
 
 			-- Zig snippets
 			ls.add_snippets("zig", {

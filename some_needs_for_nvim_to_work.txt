@@ -1,0 +1,9 @@
+Nerd Font: Your status bar and file icons will look broken (boxes with question marks) until you install a Nerd Font (like JetBrainsMono Nerd Font) on the new machine.
+
+Ripgrep (rg): Telescope uses this for searching. If it's missing, live_grep won't work.
+
+C Compiler (gcc/clang): Treesitter needs this to compile language parsers.
+
+Node.js & npm: Copilot, Pyright, and many LSPs require Node to run.
+
+Clipboard Tool: On Linux, you might need xclip or wl-clipboard for "+y to work.

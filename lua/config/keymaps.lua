@@ -13,6 +13,7 @@ vim.keymap.set("n", "m", "q", opts)
 vim.keymap.set("n", "M", "q", opts)
 vim.keymap.set("n", "Q", "I", opts)
 vim.keymap.set("n", "q", "i", opts)
+vim.keymap.set("n", "<leader>e", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
 -- Indentation and moving down
 vim.keymap.set("n", "+", "=", opts)

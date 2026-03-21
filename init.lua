@@ -252,3 +252,153 @@ end, { desc = "Go to Harpoon window 4" })
 -- 		toggle_opencode_terminal()
 -- 	end
 -- end, { desc = "Toggle opencode terminal", noremap = true, silent = true })
+------------------------------------------------------------------------
+-- Dynamic Directory Search System
+-- Allows you to add/remove directories via UI and search in them
+------------------------------------------------------------------------
+
+local quick_search_data_path = vim.fn.stdpath("data") .. "/quick_search_dirs.json"
+
+-- Helper function to read the current list from the JSON file
+local function quick_search_read_dirs()
+	local file = io.open(quick_search_data_path, "r")
+	if not file then
+		return {}
+	end
+	local content = file:read("*a")
+	file:close()
+	if content == "" then
+		return {}
+	end
+	local ok, data = pcall(vim.fn.json_decode, content)
+	return ok and data or {}
+end
+
+-- Helper function to save the list back to the JSON file
+local function quick_search_write_dirs(dirs)
+	local file = io.open(quick_search_data_path, "w")
+	if file then
+		file:write(vim.fn.json_encode(dirs))
+		file:close()
+	end
+end
+
+-- Command to ADD a new directory to your list via UI prompts
+vim.api.nvim_create_user_command("SearchDirAdd", function()
+	-- Prompt for the path (defaults to the directory you are currently in)
+	vim.ui.input({ prompt = "Directory Path: ", default = vim.fn.getcwd() }, function(path)
+		if not path or path == "" then
+			return
+		end
+
+		-- Prompt for a friendly name
+		vim.ui.input({ prompt = "Short Name for this project/folder: " }, function(name)
+			if not name or name == "" then
+				return
+			end
+
+			local dirs = quick_search_read_dirs()
+			table.insert(dirs, { name = name, path = path })
+			quick_search_write_dirs(dirs)
+			print("Added '" .. name .. "' to quick search!")
+		end)
+	end)
+end, { desc = "Add a directory to quick search" })
+
+-- Command to REMOVE a directory from your list via UI selection
+vim.api.nvim_create_user_command("SearchDirRemove", function()
+	local dirs = quick_search_read_dirs()
+	if #dirs == 0 then
+		print("No directories saved to remove.")
+		return
+	end
+
+	vim.ui.select(dirs, {
+		prompt = "Select directory to REMOVE:",
+		format_item = function(item)
+			return item.name .. " (" .. item.path .. ")"
+		end,
+	}, function(choice, idx)
+		if choice then
+			table.remove(dirs, idx)
+			quick_search_write_dirs(dirs)
+			print("Removed '" .. choice.name .. "'")
+		end
+	end)
+end, { desc = "Remove a directory from quick search" })
+
+-- Command to LIST all saved directories
+vim.api.nvim_create_user_command("SearchDirList", function()
+	local dirs = quick_search_read_dirs()
+	if #dirs == 0 then
+		print("No directories saved. Use :SearchDirAdd to add some.")
+		return
+	end
+	print("Saved search directories:")
+	for i, dir in ipairs(dirs) do
+		print(string.format("  %d. %s -> %s", i, dir.name, dir.path))
+	end
+end, { desc = "List all saved search directories" })
+
+-- Search FILES in dynamic directories (uses Telescope)
+vim.keymap.set("n", "<leader>sf", function()
+	local dirs = quick_search_read_dirs()
+
+	if #dirs == 0 then
+		-- Fall back to normal find_files in current directory
+		require("telescope.builtin").find_files()
+		return
+	end
+
+	-- Add "Current Directory" as first option
+	local options = { { name = "Current Directory", path = vim.fn.getcwd() } }
+	for _, dir in ipairs(dirs) do
+		table.insert(options, dir)
+	end
+
+	vim.ui.select(options, {
+		prompt = "Select directory to search files:",
+		format_item = function(item)
+			return item.name .. " (" .. item.path .. ")"
+		end,
+	}, function(choice)
+		if choice then
+			local expanded_path = vim.fn.expand(choice.path)
+			require("telescope.builtin").find_files({ cwd = expanded_path })
+		end
+	end)
+end, { desc = "[S]earch [F]iles in project directories" })
+
+-- Search TEXT (live_grep) in dynamic directories (uses Telescope)
+vim.keymap.set("n", "<leader>sG", function()
+	local dirs = quick_search_read_dirs()
+
+	if #dirs == 0 then
+		-- Fall back to normal live_grep in current directory
+		require("telescope.builtin").live_grep()
+		return
+	end
+
+	-- Add "Current Directory" as first option
+	local options = { { name = "Current Directory", path = vim.fn.getcwd() } }
+	for _, dir in ipairs(dirs) do
+		table.insert(options, dir)
+	end
+
+	vim.ui.select(options, {
+		prompt = "Select directory to grep in:",
+		format_item = function(item)
+			return item.name .. " (" .. item.path .. ")"
+		end,
+	}, function(choice)
+		if choice then
+			local expanded_path = vim.fn.expand(choice.path)
+			require("telescope.builtin").live_grep({ cwd = expanded_path })
+		end
+	end)
+end, { desc = "[S]earch by [G]rep in project directories" })
+
+-- Quick keymaps for adding/removing directories
+vim.keymap.set("n", "<leader>sa", "<cmd>SearchDirAdd<CR>", { desc = "[S]earch Dir [A]dd" })
+vim.keymap.set("n", "<leader>sR", "<cmd>SearchDirRemove<CR>", { desc = "[S]earch Dir [R]emove" })
+vim.keymap.set("n", "<leader>sl", "<cmd>SearchDirList<CR>", { desc = "[S]earch Dir [L]ist" })

@@ -222,25 +222,12 @@ return {
 						return require("lspconfig.util").root_pattern("schema.prisma", ".git")(fname) or vim.fn.getcwd()
 					end,
 				},
-				omnisharp = {
-					cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-					filetypes = { "cs", "csx", "vb" },
+				csharp_ls = {
+					filetypes = { "cs" },
 					root_dir = function(fname)
 						return require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git")(fname)
 							or vim.fn.getcwd()
 					end,
-					settings = {
-						FormattingOptions = {
-							EnableEditorConfigSupport = true,
-							OrganizeImports = true,
-						},
-						RoslynExtensionsOptions = {
-							EnableAnalyzersSupport = true,
-							EnableImportCompletion = true,
-							EnableDecompilationSupport = true,
-						},
-						SdkIncludePrereleases = true,
-					},
 				},
 				zls = {
 					cmd = { "zls" },
@@ -288,8 +275,8 @@ return {
 					"sqlls",
 					"prisma-language-server",
 					"angular-language-server",
-					"omnisharp", -- Ensures OmniSharp is installed
 					"zls",
+					"csharp-language-server",
 					--"dotnet-format", -- Optional: C# formatter
 				},
 			})
@@ -297,86 +284,16 @@ return {
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
-						local opts = {
+						-- 1. Get the custom settings from your `servers` table above
+						local server_opts = servers[server_name] or {}
+
+						-- 2. Merge them with your base capabilities
+						local opts = vim.tbl_deep_extend("force", {
 							capabilities = capabilities,
-						}
+						}, server_opts)
 
-						if server_name == "tailwindcss" or server_name == "tailwindcss-language-server" then
-							opts.settings = {
-								tailwindCSS = {
-									experimental = {
-										classRegex = {
-											"tw`([^`]*)",
-											"className=\\\\s*[\\\"']([^\\\"']*)",
-											"class:\\\\s*[\\\"']([^\\\"']*)",
-											"([\\\\w-]+)=\\\\s*[\\\"']([^\\\"']*)", -- styled-components
-										},
-									},
-								},
-							}
-							opts.filetypes = {
-								"html",
-								"css",
-								"scss",
-								"javascript",
-								"javascriptreact",
-								"typescript",
-								"typescriptreact",
-								"svelte",
-								"vue",
-							}
-							opts.init_options = {
-								userLanguages = {
-									typescriptreact = "html",
-									javascriptreact = "html",
-								},
-							}
-						end
-						if server_name == "yamlls" then
-							opts.settings = {
-								yaml = {
-									schemas = {
-										["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose*.yml",
-									},
-									validate = true,
-									hover = true,
-									completion = true,
-								},
-							}
-						end
-						if server_name == "dockerls" then
-							opts.settings = {
-								docker = {
-									languageserver = {
-										formatter = {
-											ignoreMultilineInstructions = true, -- Optional: Ignore multiline instructions for formatting
-										},
-									},
-								},
-							}
-							opts.filetypes = { "dockerfile" } -- Ensure dockerls attaches to Dockerfile filetype
-						end
-						if server_name == "angularls" then
-							opts.filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
-							opts.root_dir = require("lspconfig").util.root_pattern("angular.json", "project.json")
-							opts.cmd = {
-								"ngserver",
-								"--stdio",
-								"--tsProbeLocations",
-								vim.fn.expand("$PWD/node_modules"),
-								"--ngProbeLocations",
-								vim.fn.expand("$PWD/node_modules"),
-							}
-						end
-						if server_name == "omnisharp" then
-							opts.cmd = servers.omnisharp.cmd
-							opts.filetypes = servers.omnisharp.filetypes
-							opts.root_dir = servers.omnisharp.root_dir
-							opts.settings = servers.omnisharp.settings
-						end
-
-						vim.lsp.config(server_name, opts)
-						vim.lsp.enable(server_name)
+						-- 3. Set up the server using standard lspconfig
+						require("lspconfig")[server_name].setup(opts)
 					end,
 				},
 			})

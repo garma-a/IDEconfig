@@ -38,19 +38,33 @@ return {
 					}),
 				})
 			end
-			ls.add_snippets("go", {
-				s("fmtprint", {
-					t("fmt.Println("),
-					i(1),
-					t(")"),
-				}),
-				s("errnil", {
-					t("if err != nil {"),
-					t({ "", "\t" }),
-					i(1),
-					t({ "", "}" }),
-				}),
-			})
+		ls.add_snippets("go", {
+			s("fmtprint", {
+				t("fmt.Println("),
+				i(1),
+				t(")"),
+			}),
+			s("errnil", {
+				t("if err != nil {"),
+				t({ "", "\t" }),
+				i(1),
+				t({ "", "}" }),
+			}),
+		s("heap", {
+			t({ "// min-heap", "" }),
+			t({ "type Heap[T cmp.Ordered] []T", "", "" }),
+			t({ "func (h Heap[T]) Len() int           { return len(h) }", "" }),
+			t({ "func (h Heap[T]) Less(i, j int) bool { return h[i] < h[j] }", "" }),
+			t({ "func (h Heap[T]) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }", "", "" }),
+			t({ "func (h *Heap[T]) Push(x any) {", "" }),
+			t({ "\t*h = append(*h, x.(T))", "" }),
+			t({ "}", "", "" }),
+			t({ "func (h *Heap[T]) Pop() any {", "" }),
+			t({ "\tdefer func() { *h = (*h)[:len(*h)-1] }()", "" }),
+			t({ "\treturn (*h)[len(*h)-1]", "" }),
+			t({ "}" }),
+		}),
+		})
 
 			ls.add_snippets("html", {
 				s("!", {

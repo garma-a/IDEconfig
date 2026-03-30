@@ -7,29 +7,14 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
-			adapters = {
-				opts = {
-					timeout = 60000, -- 60s timeout (Safety for Egypt internet)
-					allow_insecure = true, -- Helps with DPI/Packet inspection
-				},
-			},
-			strategies = {
-				env = {
-					token = function()
-						return require("codecompanion.adapters.copilot").token
-					end,
-				},
-
+			strategies = {},
+			display = {
 				chat = {
-					adapter = {
-						name = "copilot",
-						model = "claude-sonnet-4.5", -- Exact identifier from the debug output
-					},
-				},
-				inline = {
-					adapter = {
-						name = "copilot",
-						model = "claude-sonnet-4.5",
+					window = {
+						layout = "float", -- Use floating window instead of sidebar
+						width = 1,
+						height = 1,
+						border = "rounded",
 					},
 				},
 			},
@@ -40,7 +25,7 @@ return {
 			"<M-v>",
 			"<cmd>CodeCompanionChat Toggle<cr>",
 			mode = { "n", "v" },
-			desc = "Toggle Chat Sidebar",
+			desc = "Toggle Chat Buffer",
 		},
 		{
 			"<M-a>",

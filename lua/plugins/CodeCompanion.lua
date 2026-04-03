@@ -7,11 +7,32 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
-			strategies = {},
+			-- We skip the adapters block entirely to avoid the Copilot timeout bug.
+			-- Instead, we force the model directly in the strategy.
+			strategies = {
+				chat = {
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
+					},
+				},
+				inline = {
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
+					},
+				},
+				agent = {
+					adapter = {
+						name = "copilot",
+						model = "gpt-5-mini",
+					},
+				},
+			},
 			display = {
 				chat = {
 					window = {
-						layout = "float", -- Use floating window instead of sidebar
+						layout = "float",
 						width = 1,
 						height = 1,
 						border = "rounded",

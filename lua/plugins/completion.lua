@@ -210,6 +210,104 @@ return {
 				}),
 			})
 
+			-- GraphQL snippets
+			ls.add_snippets("graphql", {
+				-- Basic query
+				s("query", {
+					t("query "),
+					i(1, "QueryName"),
+					t({ " {", "\t" }),
+					i(2, "field"),
+					t({ "", "}" }),
+				}),
+				-- Query with variables
+				s("queryv", {
+					t("query "),
+					i(1, "QueryName"),
+					t("($"),
+					i(2, "variable"),
+					t(": "),
+					i(3, "Type"),
+					t({ ") {", "\t" }),
+					i(4, "field"),
+					t({ "", "}" }),
+				}),
+				-- Mutation
+				s("mutation", {
+					t("mutation "),
+					i(1, "MutationName"),
+					t("($"),
+					i(2, "input"),
+					t(": "),
+					i(3, "InputType"),
+					t({ "!) {", "\t" }),
+					i(4, "mutationField"),
+					t({ "(", "\t\t" }),
+					i(5, "argument"),
+					t({ ": $" }),
+					i(6, "variable"),
+					t({ "", "\t) {", "\t\t" }),
+					i(7, "returnField"),
+					t({ "", "\t}", "}" }),
+				}),
+				-- Subscription
+				s("subscription", {
+					t("subscription "),
+					i(1, "SubscriptionName"),
+					t({ " {", "\t" }),
+					i(2, "field"),
+					t({ "", "}" }),
+				}),
+				-- Fragment
+				s("fragment", {
+					t("fragment "),
+					i(1, "FragmentName"),
+					t(" on "),
+					i(2, "TypeName"),
+					t({ " {", "\t" }),
+					i(3, "field"),
+					t({ "", "}" }),
+				}),
+				-- Schema type definition
+				s("type", {
+					t("type "),
+					i(1, "TypeName"),
+					t({ " {", "\t" }),
+					i(2, "field"),
+					t(": "),
+					i(3, "FieldType"),
+					t({ "", "}" }),
+				}),
+				-- Input type definition
+				s("input", {
+					t("input "),
+					i(1, "InputName"),
+					t({ " {", "\t" }),
+					i(2, "field"),
+					t(": "),
+					i(3, "FieldType"),
+					t({ "", "}" }),
+				}),
+				-- Enum
+				s("enum", {
+					t("enum "),
+					i(1, "EnumName"),
+					t({ " {", "\t" }),
+					i(2, "VALUE"),
+					t({ "", "}" }),
+				}),
+				-- Interface
+				s("interface", {
+					t("interface "),
+					i(1, "InterfaceName"),
+					t({ " {", "\t" }),
+					i(2, "field"),
+					t(": "),
+					i(3, "FieldType"),
+					t({ "", "}" }),
+				}),
+			})
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)

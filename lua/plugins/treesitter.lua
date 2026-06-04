@@ -32,6 +32,7 @@ return {
 				"prisma", -- For Prisma schema files
 				"embedded_template", -- For EJS files
 				"zig", -- For Zig programming language
+				"graphql", -- For GraphQL schema and query files
 			},
 			auto_install = true,
 			highlight = {

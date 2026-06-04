@@ -249,6 +249,36 @@ return {
 						},
 					},
 				},
+
+				-- GraphQL LSP: schema validation, type checking, hover docs, autocomplete
+				graphql = {
+					cmd = { "graphql-lsp", "server", "-m", "stream" },
+					filetypes = {
+						"graphql",
+						"graphqls",
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+					},
+					root_dir = function(fname)
+						-- Looks for .graphqlrc*, graphql.config.*, or package.json
+						return require("lspconfig.util").root_pattern(
+							".graphqlrc",
+							".graphqlrc.json",
+							".graphqlrc.yaml",
+							".graphqlrc.yml",
+							".graphqlrc.js",
+							".graphqlrc.ts",
+							"graphql.config.json",
+							"graphql.config.js",
+							"graphql.config.ts",
+							"graphql.config.yaml",
+							"graphql.config.yml",
+							"package.json"
+						)(fname) or vim.fn.getcwd()
+					end,
+				},
 			}
 
 			local ensure_installed = vim.tbl_keys(servers or {})
@@ -278,6 +308,7 @@ return {
 					"zls",
 					"csharp-language-server",
 					--"dotnet-format", -- Optional: C# formatter
+					"graphql-language-service-cli", -- GraphQL LSP
 				},
 			})
 

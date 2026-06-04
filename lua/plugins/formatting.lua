@@ -35,6 +35,7 @@ return {
 				python = { "black" }, -- Added black for Python files
 				sql = { "pg_format" },
 				zig = { "zigfmt" }, -- Zig built-in formatter
+				graphql = { "prettier" }, -- GraphQL schema/query formatting via prettier
 				-- Prisma formatting is handled by the language server automatically
 			},
 			formatters = {

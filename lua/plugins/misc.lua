@@ -1,34 +1,37 @@
--- Simple plugins without complex configuration
+-- Miscellaneous small plugins
 return {
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+	-- Detect tabstop and shiftwidth automatically from file context
+	"tpope/vim-sleuth",
+
+	-- HTML5 syntax for .html / .ejs files
 	{
 		"othree/html5.vim",
 		ft = { "html", "ejs" },
 	},
 
+	-- Color code highlighting (#fff, rgb(), hsl(), etc.)
+	-- NOTE: Using the actively maintained NvChad fork (norcalli/nvim-colorizer is abandoned)
 	{
-		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy", -- lazy-load on BufReadPre or VeryLazy
-		config = function()
-			require("colorizer").setup()
-		end,
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			user_default_options = {
+				RGB = true,
+				RRGGBB = true,
+				names = false, -- Disable named colors (e.g. "Blue") for performance
+				css = true,
+				tailwind = true,
+			},
+		},
 	},
 
+	-- Bracket/tag matching and motions
 	{
 		"andymass/vim-matchup",
 		event = "VeryLazy",
 	},
 
-	{
-		"ekalinin/Dockerfile.vim",
-		ft = "dockerfile",
-	},
-
-	{
-		"stephpy/vim-yaml",
-		ft = "yaml",
-	},
-
+	-- Markdown live preview in browser
 	{
 		"iamcco/markdown-preview.nvim",
 		build = "cd app && npm install",
@@ -38,57 +41,52 @@ return {
 		end,
 	},
 
+	-- Emmet HTML/CSS expansion
 	{
 		"mattn/emmet-vim",
 		ft = { "html", "css", "scss", "javascriptreact", "typescriptreact", "ejs" },
 		init = function()
-			-- Optional: Customize for Next.js JSX/TSX (e.g., className instead of class)
 			vim.g.user_emmet_settings = {
 				typescriptreact = {
 					extends = "jsx",
-					attributes = {
-						["className"] = "class", -- Expand class to className
-					},
+					attributes = { ["className"] = "class" },
 				},
 				javascriptreact = {
 					extends = "jsx",
-					attributes = {
-						["className"] = "class",
-					},
+					attributes = { ["className"] = "class" },
 				},
 			}
 		end,
 	},
 
+	-- Auto-close brackets and quotes
 	{
 		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
 	},
 
+	-- Visual undo tree browser
 	{
 		"mbbill/undotree",
 		keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle Undo Tree" } },
 	},
 
+	-- Cargo.toml: crate version completion and info
 	{
 		"saecki/crates.nvim",
 		ft = { "toml" },
 		config = function()
 			require("crates").setup({
-				completion = {
-					cmp = {
-						enabled = true,
-					},
-				},
+				completion = { cmp = { enabled = true } },
 			})
-			require("cmp").setup.buffer({
-				sources = { { name = "crates" } },
-			})
+			require("cmp").setup.buffer({ sources = { { name = "crates" } } })
 		end,
 	},
 
+	-- Auto-close and rename HTML/JSX/TSX tags
 	{
 		"windwp/nvim-ts-autotag",
 		ft = { "html", "javascript", "typescript", "javascriptreact", "typescriptreact" },
@@ -97,21 +95,7 @@ return {
 		end,
 	},
 
-	{
-		"elentok/format-on-save.nvim",
-		config = function()
-			require("format-on-save").setup({
-				formatters = {
-					{
-						filename_pattern = { "*.tsx", "*.jsx", "*.ts", "*.js" },
-						command = "eslint --fix --quiet",
-						-- For projects with local ESLint installation:
-						command = "./node_modules/.bin/eslint --fix --quiet $FILE_PATH",
-					},
-				},
-				-- Optional: Enable format on save by default
-				format_on_save = true,
-			})
-		end,
-	},
+	-- REMOVED: elentok/format-on-save.nvim  → conflicts with conform.nvim (both ran on JS/TS saves)
+	-- REMOVED: stephpy/vim-yaml              → Treesitter yaml grammar is strictly better
+	-- REMOVED: ekalinin/Dockerfile.vim       → Treesitter dockerfile grammar is strictly better
 }

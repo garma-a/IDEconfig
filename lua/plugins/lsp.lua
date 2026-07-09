@@ -153,28 +153,32 @@ return {
 				dockerls = {},
 
 				-- ✅ FIXED: Changed from 'tsserver' to 'ts_ls' and added single_file_support
-				ts_ls = {
-					single_file_support = true, -- ✅ This enables single file support!
+								ts_ls = {
+					cmd = { "tsc", "--lsp", "--stdio" },
+					single_file_support = true,
+					on_attach = function(client, bufnr)
+						client.server_capabilities.documentFormattingProvider = false
+						client.server_capabilities.documentRangeFormattingProvider = false
+						print("ts_ls attached to buffer " .. bufnr)
+					end,
 					settings = {
 						typescript = {
 							preferences = {
-								-- Enable Next.js-style path aliases (requires tsconfig.json "baseUrl" and "paths")
-								importModuleSpecifierPreference = "project=relative",
+								importModuleSpecifierPreference = "project-relative",
 							},
-							-- Enable React Server Components typing (Next.js 13+)
 							experimental = {
 								enableProjectDiagnostics = true,
 							},
 						},
 						javascript = {
 							preferences = {
-								importModuleSpecifierPreference = "project=relative",
+								importModuleSpecifierPreference = "project-relative",
 							},
 						},
 					},
-					-- Enable JSX/TSX support
 					filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
 				},
+
 
 				tailwindcss = {
 					filetypes = {
@@ -285,7 +289,6 @@ return {
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = {
-					"typescript-language-server", -- ✅ Correct package name
 					"eslint",
 					"stylua",
 					"html-lsp", -- ✅ HTML support
@@ -316,67 +319,28 @@ return {
 							capabilities = capabilities,
 						}, server_opts)
 
-						-- 3. Set up the server using standard lspconfig
-						require("lspconfig")[server_name].setup(opts)
+						-- 3. Set up the server using native Neovim 0.11+ API
+						if vim.lsp.config then
+							vim.lsp.config(server_name, opts)
+							vim.lsp.enable(server_name)
+						else
+							require("lspconfig")[server_name].setup(opts)
+						end
 					end,
-					["sqlls"] = function()
-						-- Completely disable sqlls from starting even if it is installed
-					end,
+					
 				},
 			})
-			vim.defer_fn(function()
-				local npm_prefix = vim.fn.trim(vim.fn.system("npm config get prefix 2>/dev/null"))
-				local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
-				local plugin_path
-				if is_windows then
-					if npm_prefix == "" then
-						npm_prefix = vim.fn.expand("$APPDATA/npm")
-					end
-					plugin_path = npm_prefix .. "/node_modules/@styled/typescript-styled-plugin"
-				else
-					if npm_prefix == "" then
-						npm_prefix = "/usr/local"
-					end
-					plugin_path = npm_prefix .. "/lib/node_modules/@styled/typescript-styled-plugin"
-				end
-
-				local plugin_paths_dir = is_windows and (npm_prefix .. "/node_modules")
-					or (npm_prefix .. "/lib/node_modules")
-
-				local ts_opts = {
-					capabilities = capabilities,
-					single_file_support = true,
-					on_attach = function(client, bufnr)
-						-- Disable ts_ls formatting: Prettier (via conform.nvim) handles TypeScript.
-						-- Without this, ts_ls and Prettier fight over formatting style on :w
-						client.server_capabilities.documentFormattingProvider = false
-						client.server_capabilities.documentRangeFormattingProvider = false
-						print("ts_ls attached to buffer " .. bufnr)
-					end,
-					init_options = {
-						plugins = {
-							{
-								name = "@styled/typescript-styled-plugin",
-								location = plugin_path,
-							},
-						},
-					},
-					settings = {
-						typescript = {
-							preferences = { importModuleSpecifierPreference = "project-relative" },
-							tsserver = { pluginPaths = { plugin_paths_dir } },
-						},
-						javascript = {
-							preferences = { importModuleSpecifierPreference = "project-relative" },
-						},
-					},
-					filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-				}
-
-				-- Re-register ts_ls with the specialized options
-				vim.lsp.config("ts_ls", ts_opts)
+			
+			-- Explicitly setup ts_ls using the native TS 7 LSP,
+			-- since we uninstalled typescript-language-server from mason.
+			if vim.lsp.config then
+				vim.lsp.config("ts_ls", vim.tbl_deep_extend("force", { capabilities = capabilities }, servers.ts_ls))
 				vim.lsp.enable("ts_ls")
-			end, 100)
+			else
+				require("lspconfig").ts_ls.setup(
+					vim.tbl_deep_extend("force", { capabilities = capabilities }, servers.ts_ls)
+				)
+			end
 		end,
 	},
 }

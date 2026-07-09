@@ -148,13 +148,6 @@ return {
 						},
 					},
 				},
-				sqlls = {
-					cmd = { "sql-language-server", "up", "--method", "stdio" },
-					filetypes = { "sql" },
-					root_dir = function()
-						return vim.loop.cwd()
-					end,
-				},
 
 				yamlls = {},
 				dockerls = {},
@@ -302,7 +295,7 @@ return {
 					"gofumpt",
 					"tailwindcss-language-server",
 					"yaml-language-server",
-					"sqlls",
+
 					"prisma-language-server",
 					"angular-language-server",
 					"zls",
@@ -325,6 +318,9 @@ return {
 
 						-- 3. Set up the server using standard lspconfig
 						require("lspconfig")[server_name].setup(opts)
+					end,
+					["sqlls"] = function()
+						-- Completely disable sqlls from starting even if it is installed
 					end,
 				},
 			})
@@ -351,6 +347,10 @@ return {
 					capabilities = capabilities,
 					single_file_support = true,
 					on_attach = function(client, bufnr)
+						-- Disable ts_ls formatting: Prettier (via conform.nvim) handles TypeScript.
+						-- Without this, ts_ls and Prettier fight over formatting style on :w
+						client.server_capabilities.documentFormattingProvider = false
+						client.server_capabilities.documentRangeFormattingProvider = false
 						print("ts_ls attached to buffer " .. bufnr)
 					end,
 					init_options = {

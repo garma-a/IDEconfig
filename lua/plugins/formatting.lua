@@ -36,6 +36,12 @@ return {
 				sql = { "pg_format" },
 				zig = { "zigfmt" }, -- Zig built-in formatter
 				graphql = { "prettier" }, -- GraphQL schema/query formatting via prettier
+				-- Use prettier for all TypeScript/JavaScript — prevents ts_ls from
+				-- applying its own opinionated formatting that conflicts with .prettierrc
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				javascript = { "prettier" },
+				javascriptreact = { "prettier" },
 				-- Prisma formatting is handled by the language server automatically
 			},
 			formatters = {

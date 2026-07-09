@@ -72,7 +72,7 @@ local function toggle_harpoon_terminal(term_num)
 	if not harpoon_term_bufs[term_num] or not vim.api.nvim_buf_is_valid(harpoon_term_bufs[term_num]) then
 		-- Create a new terminal buffer
 		vim.cmd("enew")
-		
+
 		-- Set working directory inside terminal before opening it
 		local cwd = get_current_working_directory()
 		if cwd ~= "" and vim.fn.isdirectory(cwd) == 1 then

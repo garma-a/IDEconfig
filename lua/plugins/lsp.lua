@@ -341,6 +341,37 @@ return {
 					vim.tbl_deep_extend("force", { capabilities = capabilities }, servers.ts_ls)
 				)
 			end
+
+			-- Setup dbml-lsp manually since it's not natively supported by lspconfig out of the box
+			local dbml_opts = {
+				cmd = { "dbml-lsp", "--stdio" },
+				filetypes = { "dbml" },
+				root_dir = function(fname)
+					return require("lspconfig.util").root_pattern(".git", "*.dbml")(fname) or vim.fn.getcwd()
+				end,
+				capabilities = capabilities,
+			}
+			if vim.lsp.config then
+				vim.lsp.config("dbml", dbml_opts)
+				vim.lsp.enable("dbml")
+			else
+				local configs = require("lspconfig.configs")
+				if not configs.dbml then
+					configs.dbml = {
+						default_config = {
+							cmd = { "dbml-lsp", "--stdio" },
+							filetypes = { "dbml" },
+
+							root_dir = function(fname)
+								return require("lspconfig.util").root_pattern(".git", "*.dbml")(fname) or vim.fn.getcwd()
+							end,
+							settings = {},
+						},
+					}
+				end
+				require("lspconfig").dbml.setup(dbml_opts)
+			end
 		end,
 	},
 }
+

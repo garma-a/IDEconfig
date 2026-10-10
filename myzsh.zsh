@@ -113,29 +113,37 @@ export NVM_DIR="$HOME/.nvm"
 # export PATH="$HOME/bin:$PATH"
 # bindkey -s '\ef' '~/bin/tmux-fzf.sh\n'
 alias vim='command nvim'
-alias proteus='wine "/home/girgis/.wine/drive_c/Program Files (x86)/Labcenter Electronics/Proteus 8 Professional/BIN/PDS.EXE"'
+alias proteus='wine "$HOME/.wine/drive_c/Program Files (x86)/Labcenter Electronics/Proteus 8 Professional/BIN/PDS.EXE"'
+alias grit='bun run ~/repo/work/grit/src/index.ts'
+alias mcp-sync='[ -f "$HOME/.agents/mcp/sync.sh" ] && "$HOME/.agents/mcp/sync.sh"'
+alias codex-a='CODEX_HOME="$HOME/.codex-account-a" codex'
+alias codex-b='CODEX_HOME="$HOME/.codex-account-b" codex'
 
-setxkbmap -option caps:hyper
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/home/girgis/.dotnet/tools"
-export PATH="/opt/zig-0.15.2:$PATH"
-export PATH="$HOME/bin:$PATH"
+# Remap caps to hyper only if running under X11 and setxkbmap exists
+if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null 2>&1; then
+  setxkbmap -option caps:hyper 2>/dev/null || true
+fi
 
+# Development Tool Paths
+[ -d "/usr/local/go/bin" ] && export PATH="$PATH:/usr/local/go/bin"
+[ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
+[ -d "$HOME/.dotnet/tools" ] && export PATH="$PATH:$HOME/.dotnet/tools"
+[ -d "/opt/zig-0.15.2" ] && export PATH="/opt/zig-0.15.2:$PATH"
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-export PATH=$PATH:$HOME/go/bin
+# Load Angular CLI autocompletion if ng is available
+if command -v ng >/dev/null 2>&1; then
+  source <(ng completion script 2>/dev/null)
+fi
 
-# bun completions
-[ -s "/home/girgis/.bun/_bun" ] && source "/home/girgis/.bun/_bun"
-
-# bun
+# Bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# opencode
-export PATH=/home/girgis/.opencode/bin:$PATH
-
+# Opencode
+[ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"
 export OPENCODE_DISABLE_FILETIME_CHECK=1
+
 

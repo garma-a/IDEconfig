@@ -1,6 +1,17 @@
-# Modular Neovim Configuration
+# Modular Neovim & Terminal Configuration
 
-This configuration has been organized into a modular structure for better maintainability and organization.
+This repository contains the complete developer configuration for **Neovim (v0.11+)**, **Kitty Terminal**, and **Zsh (Oh My Zsh + autocomplete + syntax highlighting + pixegami-agnoster theme)**.
+
+## 🚀 Quick Setup on a New Machine (Ubuntu / Arch / Anarchy / Fedora)
+
+To set up your complete terminal and editor experience from scratch on a new machine:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+For detailed LLM agent instructions, supported distros, and manual steps, see [AGENTS.md](AGENTS.md).
 
 ## VSCode Integration
 

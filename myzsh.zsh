@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias kitty_help="cat ~/.config/kitty/cheatsheet.txt"
 
-alias simulide='/home/girgis/Downloads/SimulIDE_1.1.0-SR0_Lin64/bin/simulide'
+[[ -x "$HOME/Downloads/SimulIDE_1.1.0-SR0_Lin64/bin/simulide" ]] && alias simulide='"$HOME/Downloads/SimulIDE_1.1.0-SR0_Lin64/bin/simulide"'
 
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -119,10 +119,7 @@ alias mcp-sync='[ -f "$HOME/.agents/mcp/sync.sh" ] && "$HOME/.agents/mcp/sync.sh
 alias codex-a='CODEX_HOME="$HOME/.codex-account-a" codex'
 alias codex-b='CODEX_HOME="$HOME/.codex-account-b" codex'
 
-# Remap caps to hyper only if running under X11 and setxkbmap exists
-if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null 2>&1; then
-  setxkbmap -option caps:hyper 2>/dev/null || true
-fi
+# Caps Lock is configured persistently by desktop/gnome.json.
 
 # Development Tool Paths
 [ -d "/usr/local/go/bin" ] && export PATH="$PATH:/usr/local/go/bin"
@@ -147,3 +144,12 @@ export BUN_INSTALL="$HOME/.bun"
 export OPENCODE_DISABLE_FILETIME_CHECK=1
 
 
+
+# Portable setup runtimes and user-owned npm command prefix.
+export PATH="$HOME/.local/share/IDEconfig/go/bin:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.local/bin:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
+export TERMINAL=kitty
+export BROWSER=google-chrome
+
+if [[ -x "$HOME/.dotnet/dotnet" ]]; then export DOTNET_ROOT="$HOME/.dotnet"; fi

@@ -16,11 +16,12 @@ return {
 				-- Disabled: vim.lsp.codelens.enable() requires Neovim >= 0.10
 				-- Remove this line once you upgrade to Neovim 0.10+
 				lsp_codelens = false,
+				lsp_cfg = false, -- Centralized in plugins/lsp.lua.
 			})
 		end,
 		event = { "CmdlineEnter" },
 		ft = { "go", "gomod" },
-		build = ':lua require("go.install").update_all_sync()',
+		build = ':lua require("go.install").install_all_sync()',
 	},
 
 	-- gopher.nvim: Go productivity helpers (struct tags, interface impl, if err)

@@ -123,7 +123,7 @@ return {
 			"mfussenegger/nvim-dap",
 		},
 		opts = {
-			ensure_installed = { "js" }, -- js = js-debug-adapter (handles TS, JS, Node)
+			ensure_installed = vim.env.IDE_SETUP == "1" and {} or { "js" }, -- js = js-debug-adapter (handles TS, JS, Node)
 			handlers = {}, -- Use default handler for automatic adapter configuration
 		},
 	},

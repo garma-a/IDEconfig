@@ -1,26 +1,30 @@
-mkdir -p ~/.config/kitty
-cat > ~/.config/kitty/cheatsheet.txt << 'EOF'
-╔════════════════════════════════════════════════════════════════╗
-║                    KITTY TERMINAL CHEATSHEET                   ║
-╚════════════════════════════════════════════════════════════════╝
+KITTY TERMINAL SHORTCUTS
 
-📑 TABS & WINDOWS
-  Ctrl+T              Create new tab
-  Alt+1, Alt+2...     Switch between tabs (1-5)
-  Ctrl+W              Close current tab
-  Ctrl+Shift+F11      Toggle fullscreen mode
+Ctrl+T              New tab in the current directory
+Alt+Shift+1..5      Switch to tab 1..5
+Ctrl+W              Close the current tab
+F11                 Toggle fullscreen
 
-📋 COPY & PASTE
-  Ctrl+C              Copy selected text (or send interrupt)
-  Ctrl+V              Paste from clipboard
+Ctrl+C              Copy selected text, otherwise send interrupt
+Ctrl+Shift+C        Copy to clipboard
+Ctrl+Shift+V        Paste from clipboard
+Ctrl+V              Disabled in this configuration
 
-🎨 OPACITY
-  Ctrl+Shift+A, M     Increase opacity
-  Ctrl+Shift+A, L     Decrease opacity
-  Ctrl+Shift+A, 1     Full opacity
+Ctrl+Shift+F5       Reload Kitty configuration
+kitty_help          Show this file
 
-⚙️  CONFIGURATION
-  Edit:     nvim ~/.config/kitty/kitty.conf
-  Reload:   Ctrl+Shift+F5
-EOF
+UBUNTU DESKTOP SHORTCUTS
 
+Win+backtick        Workspace 1
+Win+1               Workspace 2
+Win+2               Workspace 3
+Win+3               Workspace 4
+Ctrl+Alt+T          Open Kitty
+Caps Lock           Ctrl
+
+SETUP AND VERIFICATION
+
+bash setup.sh
+bash setup.sh --check
+
+See README.md and docs/SETUP.md in the repository for setup details.

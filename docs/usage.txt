@@ -1,0 +1,8 @@
+Usage: bash setup.sh [option]
+  (no option)      Install and verify the full Ubuntu GNOME amd64 environment
+  --dry-run       Show plan and skill destinations without changing anything
+  --check         Verify installation; failed/pending components exit nonzero
+  --desktop-only  Apply Chrome/Kitty defaults and GNOME shortcuts
+  --skills-only   Restore skills for installed Codex, agy, and OpenCode clients
+  --help          Show this help
+Run as your desktop user. sudo may request your password for packages.

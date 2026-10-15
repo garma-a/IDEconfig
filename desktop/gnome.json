@@ -1,0 +1,726 @@
+{
+  "version": 1,
+  "settings": [
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "activate-window-menu",
+      "value": "['<Alt>space']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "always-on-top",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "begin-move",
+      "value": "['<Alt>F7']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "begin-resize",
+      "value": "['<Alt>F8']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "close",
+      "value": "['<Alt>F4']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-group",
+      "value": "['<Alt>F6']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-group-backward",
+      "value": "['<Shift><Alt>F6']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-panels",
+      "value": "['<Control><Alt>Escape']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-panels-backward",
+      "value": "['<Shift><Control><Alt>Escape']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-windows",
+      "value": "['<Alt>Escape']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "cycle-windows-backward",
+      "value": "['<Shift><Alt>Escape']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "lower",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "maximize",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "maximize-horizontally",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "maximize-vertically",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "minimize",
+      "value": "['<Super>h']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-center",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-corner-ne",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-corner-nw",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-corner-se",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-corner-sw",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-monitor-down",
+      "value": "['<Super><Shift>Down']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-monitor-left",
+      "value": "['<Super><Shift>Left']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-monitor-right",
+      "value": "['<Super><Shift>Right']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-monitor-up",
+      "value": "['<Super><Shift>Up']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-side-e",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-side-n",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-side-s",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-side-w",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-1",
+      "value": "['<Super><Shift>Home']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-10",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-11",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-12",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-2",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-3",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-4",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-5",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-6",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-7",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-8",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-9",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-down",
+      "value": "['<Control><Shift><Alt>Down']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-last",
+      "value": "['<Super><Shift>End']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-left",
+      "value": "['<Super><Shift>Page_Up', '<Super><Shift><Alt>Left', '<Control><Shift><Alt>Left']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-right",
+      "value": "['<Super><Shift>Page_Down', '<Super><Shift><Alt>Right', '<Control><Shift><Alt>Right']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "move-to-workspace-up",
+      "value": "['<Control><Shift><Alt>Up']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "panel-main-menu",
+      "value": "['<Alt>F1']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "panel-run-dialog",
+      "value": "['<Alt>F2']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "raise",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "raise-or-lower",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "set-spew-mark",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "show-desktop",
+      "value": "['<Primary><Super>d', '<Primary><Alt>d', '<Super>d']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-applications",
+      "value": "['<Super>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-applications-backward",
+      "value": "['<Shift><Super>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-group",
+      "value": "@as []",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-group-backward",
+      "value": "['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-input-source",
+      "value": "['<Super>space', 'XF86Keyboard']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-input-source-backward",
+      "value": "['<Shift><Super>space', '<Shift>XF86Keyboard']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-panels",
+      "value": "['<Control><Alt>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-panels-backward",
+      "value": "['<Shift><Control><Alt>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-1",
+      "value": "['<Super>grave']",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-10",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-11",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-12",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-2",
+      "value": "['<Super>1']",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-3",
+      "value": "['<Super>2']",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-4",
+      "value": "['<Super>3']",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-5",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-6",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-7",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-8",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-9",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-down",
+      "value": "['<Control><Alt>Down']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-last",
+      "value": "['<Super>End']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-left",
+      "value": "['<Super>Page_Up', '<Super><Alt>Left', '<Control><Alt>Left']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-right",
+      "value": "['<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-to-workspace-up",
+      "value": "['<Control><Alt>Up']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-windows",
+      "value": "['<Alt>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "switch-windows-backward",
+      "value": "['<Shift><Alt>Tab']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "toggle-above",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "toggle-fullscreen",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "toggle-maximized",
+      "value": "['<Alt>F10']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "toggle-on-all-workspaces",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.wm.keybindings",
+      "key": "unmaximize",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "focus-active-notification",
+      "value": "['<Super>n']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-1",
+      "value": "['<Super><Control>1']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-2",
+      "value": "['<Super><Control>2']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-3",
+      "value": "['<Super><Control>3']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-4",
+      "value": "['<Super><Control>4']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-5",
+      "value": "['<Super><Control>5']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-6",
+      "value": "['<Super><Control>6']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-7",
+      "value": "['<Super><Control>7']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-8",
+      "value": "['<Super><Control>8']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "open-new-window-application-9",
+      "value": "['<Super><Control>9']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "screenshot",
+      "value": "['<Shift>Print']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "screenshot-window",
+      "value": "['<Alt>Print']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "shift-overview-down",
+      "value": "['<Super><Alt>Down']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "shift-overview-up",
+      "value": "['<Super><Alt>Up']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "show-screen-recording-ui",
+      "value": "['<Ctrl><Shift><Alt>R']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "show-screenshot-ui",
+      "value": "['Print']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-1",
+      "value": "@as []",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-2",
+      "value": "@as []",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-3",
+      "value": "@as []",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-4",
+      "value": "@as []",
+      "optional": false
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-5",
+      "value": "['<Super>5']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-6",
+      "value": "['<Super>6']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-7",
+      "value": "['<Super>7']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-8",
+      "value": "['<Super>8']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "switch-to-application-9",
+      "value": "['<Super>9']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "toggle-application-view",
+      "value": "['<Super>a']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "toggle-message-tray",
+      "value": "['<Super>v', '<Super>m']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "toggle-overview",
+      "value": "@as []",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.shell.keybindings",
+      "key": "toggle-quick-settings",
+      "value": "['<Super>s']",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.mutter",
+      "key": "dynamic-workspaces",
+      "value": "false"
+    },
+    {
+      "schema": "org.gnome.mutter",
+      "key": "workspaces-only-on-primary",
+      "value": "true"
+    },
+    {
+      "schema": "org.gnome.desktop.wm.preferences",
+      "key": "num-workspaces",
+      "value": "4"
+    },
+    {
+      "schema": "org.gnome.desktop.input-sources",
+      "key": "xkb-options",
+      "value": "['caps:ctrl_modifier']"
+    },
+    {
+      "schema": "org.gnome.settings-daemon.plugins.media-keys",
+      "key": "terminal",
+      "value": "@as []"
+    },
+    {
+      "schema": "org.gnome.shell.extensions.dash-to-dock",
+      "key": "hot-keys",
+      "value": "false",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.default-applications.terminal",
+      "key": "exec",
+      "value": "'kitty'",
+      "optional": true
+    },
+    {
+      "schema": "org.gnome.desktop.default-applications.terminal",
+      "key": "exec-arg",
+      "value": "'-e'",
+      "optional": true
+    }
+  ]
+}

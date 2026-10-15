@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "api-testing",
+      "bundle": "ai/skills/api-testing",
+      "sha256": "427126a4ddab26b400e9875a332f471bf1bf251f7000834a24bf83f3faa296d2",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/api-testing"
+      ]
+    },
+    {
+      "name": "architecture-diagrams",
+      "bundle": "ai/skills/architecture-diagrams",
+      "sha256": "58cdfab595dd69f31d174d09185107366a99a7226f7ce5c50719225756da7971",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/architecture-diagrams"
+      ]
+    },
+    {
+      "name": "arrow-js",
+      "bundle": "ai/skills/arrow-js",
+      "sha256": "925f32ff06e947da8be434810e1b2f1499cc2ed088dd97f4b835eb21e0b91ed1",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.codex/skills/arrow-js"
+      ]
+    },
+    {
+      "name": "ask-matt",
+      "bundle": "ai/skills/ask-matt",
+      "sha256": "b8152705d141540583149616ea15752896ef39446b19358804c9a7e5dba67238",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/ask-matt/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/ask-matt"
+      ]
+    },
+    {
+      "name": "caveman-token-optimizer",
+      "bundle": "ai/skills/caveman-token-optimizer",
+      "sha256": "3250f7b63039a27b163e0f37960e151bb3e7b9c8b6b25f7f267cab85a2699c9b",
+      "source_url": "https://github.com/JuliusBrussee/caveman",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/caveman-token-optimizer"
+      ]
+    },
+    {
+      "name": "code-review",
+      "bundle": "ai/skills/code-review",
+      "sha256": "372cecb96d03d5567cc8f365fb01f4b6020464dc73a3719b8bdbe5c77b7657f4",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/code-review/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/code-review"
+      ]
+    },
+    {
+      "name": "codebase-design",
+      "bundle": "ai/skills/codebase-design",
+      "sha256": "cb2096af9b8ef2c8645d24a9b408b9e64a3e6dc5aaba0dacef71607484d3ed87",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/codebase-design/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/codebase-design"
+      ]
+    },
+    {
+      "name": "deep-reasoning",
+      "bundle": "ai/skills/deep-reasoning",
+      "sha256": "ad891746394ba8ebdbbb3ba38a23e7439d4c65c3862b2bdb0c28caaaa366398c",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.agents/skills/deep-reasoning",
+        "~/.gemini/antigravity-cli/skills/deep-reasoning"
+      ]
+    },
+    {
+      "name": "deep-think",
+      "bundle": "ai/skills/deep-think",
+      "sha256": "656269620420e3ddc927dba1428035e7af8282abd0301dd3a46268fc044a480f",
+      "source_url": "https://github.com/wangyendt/wayne-skills/blob/HEAD/deep-think/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/deep-think",
+        "~/.gemini/antigravity-cli/skills/deep-think"
+      ]
+    },
+    {
+      "name": "diagnosing-bugs",
+      "bundle": "ai/skills/diagnosing-bugs",
+      "sha256": "f5374affc48a0ce6a932f4274f8f9fb57e600e8c66f6fd374ad041954c629869",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/diagnosing-bugs/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/diagnosing-bugs"
+      ]
+    },
+    {
+      "name": "domain-modeling",
+      "bundle": "ai/skills/domain-modeling",
+      "sha256": "6395f719bee974103a25a45dd625863cfa84514ac335767a294be17f3ed3f03e",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/domain-modeling/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/domain-modeling"
+      ]
+    },
+    {
+      "name": "drizzle-best-practices",
+      "bundle": "ai/skills/drizzle-best-practices",
+      "sha256": "36f8feeb4d2c5d7525118545ea7500806af8731bc52f281a5061122240bd4d28",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.codex/skills/drizzle-best-practices"
+      ]
+    },
+    {
+      "name": "find-skills",
+      "bundle": "ai/skills/find-skills",
+      "sha256": "b7dc2a876b3eb990aa9b6832eefc0e393dbf278168d66090c93e5e9dad0217da",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/find-skills"
+      ]
+    },
+    {
+      "name": "grill-me",
+      "bundle": "ai/skills/grill-me",
+      "sha256": "d983fc6945c3ac0b1dfdd957c53c1b5f2063f88b49944d595a5729ab3fc1794c",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/grill-me/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/grill-me"
+      ]
+    },
+    {
+      "name": "grill-with-docs",
+      "bundle": "ai/skills/grill-with-docs",
+      "sha256": "82c1260cc740362f058733c764da971e16b3f0a16562f0d572485ce3f1a6f0c1",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/grill-with-docs/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/grill-with-docs"
+      ]
+    },
+    {
+      "name": "grilling",
+      "bundle": "ai/skills/grilling",
+      "sha256": "254949da70c9d7f8fb14b5492dbd8b4ddfff3d5edb8b36422c72e83237ced85d",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/grilling/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/grilling"
+      ]
+    },
+    {
+      "name": "handoff",
+      "bundle": "ai/skills/handoff",
+      "sha256": "3f0fad9ec51e1531cef1e769fd89efd19a3188291e256586fb86bad325eded8d",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/handoff/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/handoff"
+      ]
+    },
+    {
+      "name": "hard-implementation",
+      "bundle": "ai/skills/hard-implementation",
+      "sha256": "7a1bcb3be1945b87a2a7d36a46dcfeec0fa1da89be39355fda1b6dc8fcc4f90c",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.agents/skills/hard-implementation",
+        "~/.codex/skills/hard-implementation",
+        "~/.gemini/antigravity-cli/skills/hard-implementation"
+      ]
+    },
+    {
+      "name": "implement",
+      "bundle": "ai/skills/implement",
+      "sha256": "131f07205e112b5e8d5790ac509573ee3d3aa135e1ded64de9a04d775548a03d",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/implement/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/implement"
+      ]
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "bundle": "ai/skills/improve-codebase-architecture",
+      "sha256": "80660e4ec3615e1c7381d71c658fa085ee1dc54bf2924b6fddcb5724a948da96",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/improve-codebase-architecture/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/improve-codebase-architecture"
+      ]
+    },
+    {
+      "name": "performance-engineer",
+      "bundle": "ai/skills/performance-engineer",
+      "sha256": "794a7ebb902413fec5e6baa4df092d1bf230e8c7233f37327efd5b3f7817f4eb",
+      "source_url": null,
+      "source_note": "Local/custom skill; original upstream was not recorded on this system.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/performance-engineer"
+      ]
+    },
+    {
+      "name": "playwright",
+      "bundle": "ai/skills/playwright",
+      "sha256": "ccb2c6914fff38e8ab9b2b7f64e02479a2d9f7cfd381be8c879b374dc1cf9cd3",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/playwright",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.codex/skills/playwright"
+      ]
+    },
+    {
+      "name": "prototype",
+      "bundle": "ai/skills/prototype",
+      "sha256": "f6dd5e95ac350e2ef013da2b65f1d763a622188963258574d865d5e93973fded",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/prototype/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/prototype"
+      ]
+    },
+    {
+      "name": "research",
+      "bundle": "ai/skills/research",
+      "sha256": "70fe82bb28df83b26a49333ef74c572ec4add56c95c84d2ff0d8474fc762a4ca",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/research/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/research"
+      ]
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "bundle": "ai/skills/resolving-merge-conflicts",
+      "sha256": "53fb83243f95b376b3f39da5b4dc361242944692b403632831f3cb3a7ee78cfe",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/resolving-merge-conflicts/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/resolving-merge-conflicts"
+      ]
+    },
+    {
+      "name": "security-best-practices",
+      "bundle": "ai/skills/security-best-practices",
+      "sha256": "d9de56325161d846ab61e4d1e6075a7ebafae50e81f32aeb0daa03c2c401f962",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.codex/skills/security-best-practices"
+      ]
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "bundle": "ai/skills/setup-matt-pocock-skills",
+      "sha256": "8c2a3bca076f366a7fe7e092a80dd8c141be0eb512810107280997473e65428b",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/setup-matt-pocock-skills"
+      ]
+    },
+    {
+      "name": "superpowers-lab",
+      "bundle": "ai/skills/superpowers-lab",
+      "sha256": "ab7d4be2015c106b0128fcf2152de4ecdb2f192a0403e46d7eb9ba265e2f7e72",
+      "source_url": "https://github.com/obra/superpowers-lab",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.gemini/antigravity-cli/skills/superpowers-lab"
+      ]
+    },
+    {
+      "name": "tdd",
+      "bundle": "ai/skills/tdd",
+      "sha256": "1267a6e7ec7f3e0a3c11e64158b33e30023b71ece0e95692eff52aa1781a76f7",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/tdd/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/tdd"
+      ]
+    },
+    {
+      "name": "teach",
+      "bundle": "ai/skills/teach",
+      "sha256": "6bb1d5c6300ac037d69d94710a166d8b0ef1debcbf2fbced856d8fddec53cefc",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/teach/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/teach"
+      ]
+    },
+    {
+      "name": "to-questionnaire",
+      "bundle": "ai/skills/to-questionnaire",
+      "sha256": "71ae0b959d6bf01aba9c43e7cbcc83c9a1d9ecc4429e51faeb3f7ac1174e3d8f",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/to-questionnaire/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/to-questionnaire"
+      ]
+    },
+    {
+      "name": "to-spec",
+      "bundle": "ai/skills/to-spec",
+      "sha256": "93722d95e5260855d8a26d1b6565343180d982df8283e7229ffaceae479308c8",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/to-spec/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/to-spec"
+      ]
+    },
+    {
+      "name": "to-tickets",
+      "bundle": "ai/skills/to-tickets",
+      "sha256": "be0569296c7e6b7058f35eabdb3c176ae163f219ec11d1677ed81ba1511b6bc2",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/to-tickets/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/to-tickets"
+      ]
+    },
+    {
+      "name": "triage",
+      "bundle": "ai/skills/triage",
+      "sha256": "3cac4a2ca16b455f6a012d853e21918d3dd32e3292ed31f20a5255c8253054df",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/triage/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/triage"
+      ]
+    },
+    {
+      "name": "wait-what",
+      "bundle": "ai/skills/wait-what",
+      "sha256": "bdf85191716fe6dbf1aeb4de93d8ee97b4e5f6c1bd2e9c9bf9389dca48e623b4",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/wait-what/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/wait-what"
+      ]
+    },
+    {
+      "name": "wayfinder",
+      "bundle": "ai/skills/wayfinder",
+      "sha256": "a1588462b8ea83e55c00993abba1eb0c2691bccef571e8b02f45c7d7c8e131e9",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/wayfinder/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/wayfinder"
+      ]
+    },
+    {
+      "name": "wizard",
+      "bundle": "ai/skills/wizard",
+      "sha256": "a196b565f3dfec62a9e4e8254aed0622b40b4bd6361fd9957f4d1231f1b98d71",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/engineering/wizard/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/wizard"
+      ]
+    },
+    {
+      "name": "writing-for-agents",
+      "bundle": "ai/skills/writing-for-agents",
+      "sha256": "8533adac15616f526cc34926643c5d6cd5198d4c8bab57ebdd9c69f3bfe5003c",
+      "source_url": "https://github.com/mattpocock/skills/blob/HEAD/skills/productivity/writing-for-agents/SKILL.md",
+      "source_note": "Source recorded locally; bundled files preserve the installed version.",
+      "captured_from": [
+        "~/.agents/skills/writing-for-agents"
+      ]
+    }
+  ]
+}

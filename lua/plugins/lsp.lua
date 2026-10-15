@@ -1,3 +1,11 @@
+-- Native Neovim LSP root callbacks receive a buffer and an on_dir callback.
+local function root_for(patterns)
+	return function(bufnr, on_dir)
+		local filename = vim.api.nvim_buf_get_name(bufnr)
+		on_dir(require("lspconfig.util").root_pattern(unpack(patterns))(filename) or vim.fn.getcwd())
+	end
+end
+
 return {
 	-- LSP Plugins
 	{
@@ -139,7 +147,7 @@ return {
 				html = {
 					filetypes = { "html", "ejs" }, -- Add EJS support
 				},
-				css = {},
+				cssls = {},
 				gopls = {
 					settings = {
 						gopls = {
@@ -212,27 +220,19 @@ return {
 					},
 				},
 
-				prisma = {
+				prismals = {
 					cmd = { "prisma-language-server", "--stdio" },
 					filetypes = { "prisma" },
-					root_dir = function(fname)
-						return require("lspconfig.util").root_pattern("schema.prisma", ".git")(fname) or vim.fn.getcwd()
-					end,
+					root_dir = root_for({ "schema.prisma", ".git" }),
 				},
 				csharp_ls = {
 					filetypes = { "cs" },
-					root_dir = function(fname)
-						return require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git")(fname)
-							or vim.fn.getcwd()
-					end,
+					root_dir = root_for({ "*.sln", "*.csproj", ".git" }),
 				},
 				zls = {
 					cmd = { "zls" },
 					filetypes = { "zig", "zir" },
-					root_dir = function(fname)
-						return require("lspconfig.util").root_pattern("zls.json", "build.zig", ".git")(fname)
-							or vim.fn.getcwd()
-					end,
+					root_dir = root_for({ "zls.json", "build.zig", ".git" }),
 					settings = {
 						zls = {
 							enable_snippets = true,
@@ -258,119 +258,40 @@ return {
 						"typescript",
 						"typescriptreact",
 					},
-					root_dir = function(fname)
-						-- Looks for .graphqlrc*, graphql.config.*, or package.json
-						return require("lspconfig.util").root_pattern(
-							".graphqlrc",
-							".graphqlrc.json",
-							".graphqlrc.yaml",
-							".graphqlrc.yml",
-							".graphqlrc.js",
-							".graphqlrc.ts",
-							"graphql.config.json",
-							"graphql.config.js",
-							"graphql.config.ts",
-							"graphql.config.yaml",
-							"graphql.config.yml",
-							"package.json"
-						)(fname) or vim.fn.getcwd()
-					end,
+					root_dir = root_for({
+						".graphqlrc", ".graphqlrc.json", ".graphqlrc.yaml", ".graphqlrc.yml",
+						".graphqlrc.js", ".graphqlrc.ts", "graphql.config.json", "graphql.config.js",
+						"graphql.config.ts", "graphql.config.yaml", "graphql.config.yml", "package.json",
+					}),
 				},
 			}
 
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"eslint", -- Keep this
-				-- Remove "tsserver" - it's now "ts_ls" and handled by servers table
-				"html",
-				"css",
-				"prismals",
-			})
 			require("mason-tool-installer").setup({
-				ensure_installed = {
-					"eslint",
-					"stylua",
-					"html-lsp", -- ✅ HTML support
-					"css-lsp", -- ✅ CSS support
-					"prettier",
-					"gopls",
-					"gofumpt",
-					"tailwindcss-language-server",
-					"yaml-language-server",
-
-					"prisma-language-server",
-					"angular-language-server",
-					"zls",
-					"csharp-language-server",
-					--"dotnet-format", -- Optional: C# formatter
-					"graphql-language-service-cli", -- GraphQL LSP
-				},
+				ensure_installed = require("config.tools"),
+				run_on_start = vim.env.IDE_SETUP ~= "1",
 			})
-
-			require("mason-lspconfig").setup({
-				handlers = {
-					function(server_name)
-						-- 1. Get the custom settings from your `servers` table above
-						local server_opts = servers[server_name] or {}
-
-						-- 2. Merge them with your base capabilities
-						local opts = vim.tbl_deep_extend("force", {
-							capabilities = capabilities,
-						}, server_opts)
-
-						-- 3. Set up the server using native Neovim 0.11+ API
-						if vim.lsp.config then
-							vim.lsp.config(server_name, opts)
-							vim.lsp.enable(server_name)
-						else
-							require("lspconfig")[server_name].setup(opts)
-						end
-					end,
-					
-				},
-			})
-			
-			-- Explicitly setup ts_ls using the native TS 7 LSP,
-			-- since we uninstalled typescript-language-server from mason.
-			if vim.lsp.config then
-				vim.lsp.config("ts_ls", vim.tbl_deep_extend("force", { capabilities = capabilities }, servers.ts_ls))
-				vim.lsp.enable("ts_ls")
-			else
-				require("lspconfig").ts_ls.setup(
-					vim.tbl_deep_extend("force", { capabilities = capabilities }, servers.ts_ls)
-				)
+			-- The locked mason-lspconfig v2 uses automatic_enable; handlers were removed.
+			-- Configure explicitly so capabilities and per-server settings always apply.
+			require("mason-lspconfig").setup({ automatic_enable = false })
+			servers.eslint = {}
+			servers.angularls = {}
+			servers.pyright = {}
+			servers.clangd = {}
+			servers.lua_ls = {}
+			for name, opts in pairs(servers) do
+				vim.lsp.config(name, vim.tbl_deep_extend("force", { capabilities = capabilities }, opts))
+				vim.lsp.enable(name)
 			end
 
 			-- Setup dbml-lsp manually since it's not natively supported by lspconfig out of the box
 			local dbml_opts = {
 				cmd = { "dbml-lsp", "--stdio" },
 				filetypes = { "dbml" },
-				root_dir = function(fname)
-					return require("lspconfig.util").root_pattern(".git", "*.dbml")(fname) or vim.fn.getcwd()
-				end,
+				root_dir = root_for({ ".git", "*.dbml" }),
 				capabilities = capabilities,
 			}
-			if vim.lsp.config then
-				vim.lsp.config("dbml", dbml_opts)
-				vim.lsp.enable("dbml")
-			else
-				local configs = require("lspconfig.configs")
-				if not configs.dbml then
-					configs.dbml = {
-						default_config = {
-							cmd = { "dbml-lsp", "--stdio" },
-							filetypes = { "dbml" },
-
-							root_dir = function(fname)
-								return require("lspconfig.util").root_pattern(".git", "*.dbml")(fname) or vim.fn.getcwd()
-							end,
-							settings = {},
-						},
-					}
-				end
-				require("lspconfig").dbml.setup(dbml_opts)
-			end
+			vim.lsp.config("dbml", dbml_opts)
+			vim.lsp.enable("dbml")
 		end,
 	},
 }

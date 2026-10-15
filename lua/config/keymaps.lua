@@ -346,8 +346,8 @@ vim.keymap.set("n", "<A-f>", _G.focus_floating_window, { desc = "Focus floating 
 ----------------------------------
 -- Key: Visual mode fix
 vim.keymap.set("v", "<leader>cf", function()
-	require("CopilotChat").ask("Fix this code", { selection = require("CopilotChat.select").visual })
-end, { desc = "Copilot Fix" })
+	vim.cmd("'<,'>CodeCompanion Fix the selected code")
+end, { desc = "AI Fix" })
 
 -- Custom "Smart Shift-Tab" logic
 -- vim.keymap.set("i", "<S-Tab>", function()
@@ -361,12 +361,12 @@ end, { desc = "Copilot Fix" })
 
 -- Key: Visual mode explain
 vim.keymap.set("v", "<leader>ce", function()
-	require("CopilotChat").ask("Explain this code", { selection = require("CopilotChat.select").visual })
-end, { desc = "Copilot Explain" })
+	vim.cmd("'<,'>CodeCompanionChat Explain the selected code")
+end, { desc = "AI Explain" })
 
 vim.keymap.set("n", "<leader>co", function()
-	-- Run the CopilotChat command
-	vim.cmd("CopilotChat")
+	-- Open the configured CodeCompanion chat
+	vim.cmd("CodeCompanionChat")
 	-- Simulate pressing `i` after a short delay
 	vim.defer_fn(function()
 		vim.api.nvim_feedkeys("i", "n", false)

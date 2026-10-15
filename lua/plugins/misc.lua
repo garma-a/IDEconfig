@@ -34,7 +34,7 @@ return {
 	-- Markdown live preview in browser
 	{
 		"iamcco/markdown-preview.nvim",
-		build = "cd app && npm install",
+		build = "cd app && npm install --no-save --package-lock=false",
 		ft = { "markdown" },
 		config = function()
 			vim.g.mkdp_auto_start = 0

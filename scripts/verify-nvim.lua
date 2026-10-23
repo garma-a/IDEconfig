@@ -20,7 +20,7 @@ local failures = {}
 local function check(condition, message)
   if not condition then table.insert(failures, message) end
 end
-check(vim.fn.has("nvim-0.11.3") == 1, "Neovim >=0.11.3 required")
+check(vim.fn.has("nvim-0.12") == 1, "Neovim >=0.12 required by the locked HTTP plugin")
 check(vim.v.errmsg == "", vim.v.errmsg)
 check(#startup_errors == 0, table.concat(startup_errors, "\n"))
 local registry = require("mason-registry")
@@ -43,6 +43,13 @@ for name, pin in pairs(lock) do
     local commit = vim.fn.system({ "git", "-C", plugin.dir, "rev-parse", "HEAD" }):gsub("%s+$", "")
     check(commit == pin.commit, "Plugin differs from lockfile: " .. name)
   end
+end
+local preview = require("lazy.core.config").plugins["markdown-preview.nvim"]
+if preview then
+  local result = vim.system({ "node", "-e", "require('./lib/app/preloadmodules.js')" }, {
+    cwd = preview.dir .. "/app", text = true,
+  }):wait(15000)
+  check(result.code == 0, "Markdown preview runtime unavailable: " .. (result.stderr or ""))
 end
 for _, name in ipairs({ "html", "cssls", "gopls", "yamlls", "dockerls", "prismals", "csharp_ls", "zls", "graphql", "pyright", "clangd", "lua_ls", "ts_ls", "dbml" }) do
   check(vim.lsp.is_enabled(name), "LSP not enabled: " .. name)

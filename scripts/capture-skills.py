@@ -16,10 +16,10 @@ home = Path.home()
 manifest_path = repo / "ai/skills-manifest.json"
 previous = {s["name"]: s for s in json.loads(manifest_path.read_text())["skills"]} if manifest_path.exists() else {}
 roots = [home / ".agents/skills", home / ".codex/skills", home / ".gemini/antigravity-cli/skills", home / ".config/opencode/skills"]
-for profile in sorted(home.glob(".codex-account-*/skills")):
+for profile in sorted({p.resolve() / "skills" for p in home.glob(".codex-*") if p.is_dir()}):
     roots.append(profile)
 if os.getenv("CODEX_HOME"):
-    roots.append(Path(os.environ["CODEX_HOME"]) / "skills")
+    roots.append(Path(os.environ["CODEX_HOME"]).expanduser().resolve() / "skills")
 lock_path = home / ".agents/.skill-lock.json"
 lock = json.loads(lock_path.read_text()).get("skills", {}) if lock_path.exists() else {}
 sources = {

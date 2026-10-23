@@ -34,7 +34,8 @@ return {
 	-- Markdown live preview in browser
 	{
 		"iamcco/markdown-preview.nvim",
-		build = "cd app && npm install --no-save --package-lock=false",
+		-- Compiled app code also imports this dependency from the root manifest.
+		build = "cd app && npm install --no-save --package-lock=false msgpack-lite@0.1.26",
 		ft = { "markdown" },
 		config = function()
 			vim.g.mkdp_auto_start = 0

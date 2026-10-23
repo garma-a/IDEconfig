@@ -92,6 +92,25 @@ class SetupTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertEqual(len(list((home / ".local/state/IDEconfig").glob("desktop-before-*"))), 1)
 
+    def test_codex_profile_naming_compatibility(self):
+        with tempfile.TemporaryDirectory(prefix="ideconfig-test-") as tmp:
+            home = Path(tmp)
+            bindir = home / "bin"
+            bindir.mkdir()
+            p = bindir / "codex"
+            p.write_text("#!/bin/sh\nexit 0\n")
+            p.chmod(0o755)
+            (home / ".codex-a").mkdir()
+            (home / ".codex-account-b").mkdir()
+            env = dict(os.environ, HOME=tmp, PATH=str(bindir) + ":/usr/bin:/bin")
+            env.pop("CODEX_HOME", None)
+            r = subprocess.run(["python3", str(REPO / "scripts/skills.py")], env=env, text=True, capture_output=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue((home / ".codex-a/skills/playwright/scripts/playwright_cli.sh").is_file())
+            self.assertTrue((home / ".codex-account-b/skills/playwright/scripts/playwright_cli.sh").is_file())
+            check_res = subprocess.run(["python3", str(REPO / "scripts/skills.py"), "--check"], env=env, text=True, capture_output=True)
+            self.assertEqual(check_res.returncode, 0, check_res.stderr)
+
     def test_workspace_profile_has_reachable_exact_destinations(self):
         settings = json.loads((REPO / "desktop/gnome.json").read_text())["settings"]
         lookup = {(s["schema"], s["key"]): s["value"] for s in settings}

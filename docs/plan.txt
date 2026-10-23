@@ -1,7 +1,7 @@
 Full setup plan (Ubuntu GNOME amd64; run as your desktop user):
 1. Install apt prerequisites, Kitty, clipboard tools, compilers and database CLIs.
 2. Install official Chrome and set it as the default browser.
-3. Install Neovim >=0.11.3, Node 24, Go 1.26, .NET 10 and Zig 0.15.2.
+3. Install Neovim >=0.12, Node 24, Go 1.26, .NET 10, Zig 0.15.2 and tree-sitter CLI.
 4. Install JetBrains Mono Nerd Font, Oh My Zsh, theme and shell plugins.
 5. Back up conflicting dotfiles and link Kitty/Zsh/Neovim to this checkout.
 6. Restore bundled custom skills for installed AI clients. Skip absent clients.

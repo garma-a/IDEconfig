@@ -598,7 +598,7 @@
     {
       "schema": "org.gnome.shell.keybindings",
       "key": "show-screenshot-ui",
-      "value": "['Print']",
+      "value": "['F2']",
       "optional": true
     },
     {
@@ -693,6 +693,11 @@
       "schema": "org.gnome.desktop.wm.preferences",
       "key": "num-workspaces",
       "value": "4"
+    },
+    {
+      "schema": "org.gnome.desktop.wm.preferences",
+      "key": "button-layout",
+      "value": "'appmenu:minimize,maximize,close'"
     },
     {
       "schema": "org.gnome.desktop.input-sources",

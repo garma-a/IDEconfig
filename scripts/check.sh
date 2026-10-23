@@ -7,7 +7,7 @@ failed=0
 check() {
   if "$@"; then printf 'OK: %s\n' "$*"; else printf 'FAIL: %s\n' "$*" >&2; failed=1; fi
 }
-for tool in google-chrome kitty zsh nvim node npm go zig dotnet rg fd gcc make xclip wl-copy; do
+for tool in google-chrome kitty zsh nvim node npm go zig dotnet rg fd gcc make xclip wl-copy tree-sitter; do
   check command -v "$tool"
 done
 check test -f "$HOME/.config/kitty/kitty.conf"

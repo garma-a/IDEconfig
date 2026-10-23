@@ -49,8 +49,8 @@ if ! dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -q 'in
   chmod 644 "$TASK_TMP/chrome.deb"
   sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y "$TASK_TMP/chrome.deb"
 fi
-if ! command -v nvim >/dev/null || ! nvim --clean --headless '+lua assert(vim.fn.has("nvim-0.11.3") == 1)' +qa >/dev/null 2>&1; then
-  curl -fL --retry 3 https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-linux-x86_64.tar.gz -o "$TASK_TMP/nvim.tar.gz"
+if ! command -v nvim >/dev/null || ! nvim --clean --headless '+lua assert(vim.fn.has("nvim-0.12") == 1)' +qa >/dev/null 2>&1; then
+  curl -fL --retry 3 https://github.com/neovim/neovim/releases/download/v0.12.6/nvim-linux-x86_64.tar.gz -o "$TASK_TMP/nvim.tar.gz"
   mkdir -p "$TASK_TMP/nvim"
   tar -xzf "$TASK_TMP/nvim.tar.gz" -C "$TASK_TMP/nvim" --strip-components=1
   replace_tree "$TASK_TMP/nvim" "$HOME/.local/share/IDEconfig/nvim"
@@ -73,6 +73,8 @@ if [[ $OPENCODE_WAS_INSTALLED -eq 1 ]] && ! command -v opencode >/dev/null; then
   npm install --global --prefix "$HOME/.local" opencode-ai
 fi
 npm install --global --prefix "$HOME/.local" typescript@7.0.2 typescript-language-server dbml-lsp@0.1.0
+# Kulala's locked HTTP grammar is generated locally by this CLI.
+npm install --global --prefix "$HOME/.local" --allow-scripts=tree-sitter-cli tree-sitter-cli@0.27.1
 python3 -m venv "$HOME/.neovim-venv"
 "$HOME/.neovim-venv/bin/pip" install --disable-pip-version-check pynvim
 if ! command -v go >/dev/null || [[ "$(go env GOVERSION)" != go1.26.* ]]; then
@@ -108,6 +110,13 @@ for item in 'myKittyConfig.conf:kitty.conf' 'current-theme.conf:current-theme.co
   link_file "$REPO_DIR/${item%%:*}" "$HOME/.config/kitty/${item#*:}"
 done
 if [[ "$(realpath -m "$HOME/.config/nvim")" != "$REPO_DIR" ]]; then link_file "$REPO_DIR" "$HOME/.config/nvim"; fi
+for acc in a b; do
+  if [[ -d "$HOME/.codex-$acc" && ! -e "$HOME/.codex-account-$acc" ]]; then
+    ln -s ".codex-$acc" "$HOME/.codex-account-$acc"
+  elif [[ -d "$HOME/.codex-account-$acc" && ! -e "$HOME/.codex-$acc" ]]; then
+    ln -s ".codex-account-$acc" "$HOME/.codex-$acc"
+  fi
+done
 sudo chsh -s "$(command -v zsh)" "$(id -un)"
 sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/kitty 60
 sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty

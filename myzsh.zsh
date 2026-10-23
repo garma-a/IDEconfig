@@ -74,7 +74,7 @@ alias kitty_help="cat ~/.config/kitty/cheatsheet.txt"
 
 [[ -x "$HOME/Downloads/SimulIDE_1.1.0-SR0_Lin64/bin/simulide" ]] && alias simulide='"$HOME/Downloads/SimulIDE_1.1.0-SR0_Lin64/bin/simulide"'
 
-
+unset zle_bracketed_paste
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -116,12 +116,22 @@ alias vim='command nvim'
 alias proteus='wine "$HOME/.wine/drive_c/Program Files (x86)/Labcenter Electronics/Proteus 8 Professional/BIN/PDS.EXE"'
 alias grit='bun run ~/repo/work/grit/src/index.ts'
 alias mcp-sync='[ -f "$HOME/.agents/mcp/sync.sh" ] && "$HOME/.agents/mcp/sync.sh"'
-alias codex-a='CODEX_HOME="$HOME/.codex-account-a" codex'
-alias codex-b='CODEX_HOME="$HOME/.codex-account-b" codex'
+if [[ -d "$HOME/.codex-account-a" && ! -d "$HOME/.codex-a" ]]; then
+  alias codex-a='CODEX_HOME="$HOME/.codex-account-a" codex'
+else
+  alias codex-a='CODEX_HOME="$HOME/.codex-a" codex'
+fi
+
+if [[ -d "$HOME/.codex-account-b" && ! -d "$HOME/.codex-b" ]]; then
+  alias codex-b='CODEX_HOME="$HOME/.codex-account-b" codex'
+else
+  alias codex-b='CODEX_HOME="$HOME/.codex-b" codex'
+fi
 
 # Caps Lock is configured persistently by desktop/gnome.json.
 
 # Development Tool Paths
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -d "/usr/local/go/bin" ] && export PATH="$PATH:/usr/local/go/bin"
 [ -d "$HOME/go/bin" ] && export PATH="$PATH:$HOME/go/bin"
 [ -d "$HOME/.dotnet/tools" ] && export PATH="$PATH:$HOME/.dotnet/tools"

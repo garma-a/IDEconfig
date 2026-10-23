@@ -66,6 +66,10 @@ local ok, err = xpcall(function()
   end
   assert(vim.wait(1800000, function() return pending == 0 end, 100), "Mason installations timed out. See :MasonLog")
   assert(#install_failures == 0, "Mason installs failed: " .. table.concat(install_failures, ", ") .. ". See :MasonLog")
+  -- Avoid stalled HTTP/2 archive downloads and bound each network attempt.
+  require("nvim-treesitter.install").command_extra_args.curl = {
+    "--http1.1", "--connect-timeout", "20", "--max-time", "180", "--retry", "3",
+  }
   local parsers = require("plugins.treesitter")[1].opts.ensure_installed
   local missing = vim.deepcopy(parsers)
   for attempt = 1, 3 do

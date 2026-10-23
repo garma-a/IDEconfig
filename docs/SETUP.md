@@ -10,7 +10,7 @@ The checkout may live anywhere. Setup links ~/.config/nvim, ~/.zshrc, Kitty conf
 
 ## Repeatability
 
-Neovim uses the checked-in plugin lockfile and a compatible official release (0.11.6 when an upgrade is needed). Node 24, Go 1.26.0, Zig 0.15.2 and ZLS 0.15.0 are deliberate runtime baselines. TypeScript 7.0.2 provides the configured native `tsc --lsp --stdio` command; DBML LSP is 0.1.0. .NET uses the latest servicing release in channel 10.0. Other Mason packages, fonts, Chrome and apt packages receive their upstream versions at install time. This is a repeatable configuration, not a bit-for-bit OS image.
+Neovim uses the checked-in plugin lockfile and a compatible official release (0.12.6 when an upgrade is needed). The locked Kulala HTTP plugin requires Neovim 0.12 and the tree-sitter CLI (0.27.1). Node 24, Go 1.26.0, Zig 0.15.2 and ZLS 0.15.0 are deliberate runtime baselines. TypeScript 7.0.2 provides the configured native `tsc --lsp --stdio` command; DBML LSP is 0.1.0. .NET uses the latest servicing release in channel 10.0. Other Mason packages, fonts, Chrome and apt packages receive their upstream versions at install time. This is a repeatable configuration, not a bit-for-bit OS image.
 
 Skills use SHA-256-checked local snapshots. Source links identify origins where recorded; unknown local origins are explicitly labelled. scripts/capture-skills.py updates snapshots from known skill directories only, and refuses conflicting same-name variants or external symlinks. It does not export account configuration. The Playwright skill also receives compatibility links under the default and existing Codex profile skill directories because its helper command uses CODEX_HOME/skills/playwright. Review the diff before committing a refresh.
 
@@ -21,6 +21,8 @@ The installer waits for plugin operations, Mason packages and configured parsers
 The captured bindings are in desktop/gnome.json. Four fixed workspaces intentionally replace the source machine's dynamic-workspace setting, ensuring all four numbered destinations exist on an empty new desktop.
 
 Kitty defaults cover update-alternatives, the older GNOME terminal shortcut, and the newer Ubuntu XDG terminal preference lists. A deterministic Ctrl+Alt+T custom shortcut is installed while preserving other custom-shortcut entries. Workspace keys take precedence over Ubuntu's app-launch keys. The setup applies Caps Lock as Ctrl through GNOME, covering X11 and Wayland.
+
+Kitty puts tabs at the bottom and uses XWayland within the GNOME Wayland desktop. This gives it GNOME's title bar with minimize, maximize and close buttons, and avoids the solid black fullscreen background reproduced with Kitty's native Wayland backend on GNOME 50. F11 remains true fullscreen, with background opacity set to 0.8. Backend and decoration changes require opening a new Kitty process; reloading its configuration is insufficient.
 
 The desktop helper refuses to apply changes outside a GNOME user session. From SSH, software setup can finish but --check reports pending desktop configuration. Log into GNOME and run `bash setup.sh --desktop-only`, then `bash setup.sh --check`.
 
@@ -36,7 +38,7 @@ The desktop helper refuses to apply changes outside a GNOME user session. From S
 
 ## User-only tasks
 
-Chrome sync, Codex/provider authentication, Copilot authorization, Supermaven authorization and private repository access depend on the user's accounts. Fresh-machine setup does not copy credentials. Codex aliases for account-a/account-b are convenience launchers; sign in to each profile separately if desired. Connectors and MCP servers need their own client installation and authentication.
+Chrome sync, Codex/provider authentication, Copilot authorization, Supermaven authorization and private repository access depend on the user's accounts. The locked Kulala plugin also downloads a separate kulala-core backend using a license token; its installed binary and token must be migrated from the old machine or supplied through Kulala's own prompt. The general setup check does not claim to verify authenticated integrations. Fresh-machine setup does not copy credentials. Codex aliases for account-a/account-b are convenience launchers; sign in to each profile separately if desired. Connectors and MCP servers need their own client installation and authentication.
 
 This repository covers the requested desktop/developer environment. Applications referenced only by optional personal aliases (for example SimulIDE, Proteus/Wine or a private grit checkout) are not installed. Project dependencies, containers, databases and personal files are restored separately.
 
@@ -46,7 +48,7 @@ This repository covers the requested desktop/developer environment. Applications
 - [Antigravity skill locations](https://www.antigravity.google/docs/skills): CLI skills under ~/.gemini/antigravity-cli/skills.
 - [OpenCode skill discovery](https://opencode.ai/docs/skills): global ~/.config/opencode/skills.
 - [Ubuntu default terminal](https://ubuntu.com/desktop/docs/en/latest/how-to/change-the-default-terminal/): Ubuntu 25.04+ uses ubuntu-xdg-terminals.list.
-- [Official Neovim release](https://github.com/neovim/neovim/releases/tag/v0.11.6).
+- [Official Neovim release](https://github.com/neovim/neovim/releases/tag/v0.12.6).
 - [Mason headless installation](https://github.com/mason-org/mason.nvim/blob/main/doc/mason.txt).
 - [Zig downloads](https://ziglang.org/download/) and [Go downloads](https://go.dev/dl/).
 

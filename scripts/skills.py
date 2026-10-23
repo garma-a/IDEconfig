@@ -55,9 +55,12 @@ def main():
         skill_targets = list(targets)
         if skill["name"] == "playwright" and any(client.startswith("Codex") for client, _ in targets):
             # The upstream skill's helper path is CODEX_HOME/skills/playwright.
-            profiles = {Path.home() / ".codex", *Path.home().glob(".codex-account-*")}
+            profiles = {
+                Path.home() / ".codex",
+                *(p.resolve() for p in Path.home().glob(".codex-*") if p.is_dir()),
+            }
             if os.getenv("CODEX_HOME"):
-                profiles.add(Path(os.environ["CODEX_HOME"]).expanduser())
+                profiles.add(Path(os.environ["CODEX_HOME"]).expanduser().resolve())
             skill_targets.extend(("Codex helper compatibility", profile / "skills") for profile in sorted(profiles))
         for client, root in skill_targets:
             target = root / skill["name"]

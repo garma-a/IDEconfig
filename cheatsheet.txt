@@ -1,6 +1,6 @@
 KITTY TERMINAL SHORTCUTS
 
-Ctrl+T              New tab in the current directory
+Ctrl+T / Ctrl+Y     New tab in the current directory
 Alt+Shift+1..5      Switch to tab 1..5
 Ctrl+W              Close the current tab
 F11                 Toggle fullscreen
